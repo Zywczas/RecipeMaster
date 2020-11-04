@@ -37,6 +37,5 @@ class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
                 else -> false
             }
         }
-
     }
 }

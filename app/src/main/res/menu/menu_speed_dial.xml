@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/get_recipe_item"
-        android:icon="@mipmap/ic_get_recipe"
-        android:title="Get the recipe" />
-
-    <item
         android:id="@+id/facebook_item"
         android:icon="@mipmap/ic_facebook"
         android:title="Zaloguj przez Facebooka" />
+
+    <item
+        android:id="@+id/get_recipe_item"
+        android:icon="@mipmap/ic_get_recipe"
+        android:title="Get the recipe" />
 
 </menu>
