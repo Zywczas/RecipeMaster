@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
@@ -43,7 +44,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.4" />
-
+        <!--todo pousuwac warningi z layoutow-->
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -56,13 +57,68 @@
             app:layout_constraintEnd_toEndOf="@+id/view"
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/view" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_main_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@android:drawable/ic_input_add"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_recipes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:src="@android:drawable/btn_star_big_on"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@+id/fab_facebook"
+            app:layout_constraintEnd_toEndOf="@+id/fab_facebook"
+            app:layout_constraintStart_toStartOf="@+id/fab_facebook" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@+id/fab_main_login"
+            app:layout_constraintEnd_toEndOf="@+id/fab_main_login"
+            app:layout_constraintStart_toStartOf="@+id/fab_main_login"
+            tools:src="@tools:sample/backgrounds/scenic" />
+<!--        todo dac elevation na teksty i okragle rogi-->
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Get the recipe"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_recipes"
+            app:layout_constraintEnd_toStartOf="@+id/fab_recipes"
+            app:layout_constraintTop_toTopOf="@+id/fab_recipes" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Zaloguj przez Facebook'a"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_facebook"
+            app:layout_constraintEnd_toStartOf="@+id/fab_facebook"
+            app:layout_constraintTop_toTopOf="@+id/fab_facebook" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:src="@android:drawable/ic_input_add"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp" />"
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

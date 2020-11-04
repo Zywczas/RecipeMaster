@@ -69,6 +69,9 @@ dependencies {
     //circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //FAB speed dial
+    implementation "com.leinardi.android:speed-dial:3.1.1"
+
     //RxJava
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.0'
     implementation 'io.reactivex.rxjava3:rxjava:3.0.4'
