@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zywczas.recipemaster.R
+import javax.inject.Inject
 
 
-class LoginFragment : Fragment(R.layout.fragment_login) {
+class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
 
 
 }
