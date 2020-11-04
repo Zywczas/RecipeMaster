@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Recipe Master</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+<!--    Facebook -->
+    <string name="facebook_app_id">666053657437502</string>
+
 </resources>

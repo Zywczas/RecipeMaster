@@ -59,7 +59,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    todo poprawic pozniej color background wszystkich guzikow i powiekszyc ikonki-->
+<!--    todo poprawic pozniej color background wszystkich guzikow i powiekszyc ikonki - pewnie paddding-->
 <!--    todo nie pokazuje calego tekstu zaloguj przez fejsa-->
     <com.leinardi.android.speeddial.SpeedDialView
         android:id="@+id/speed_dial_login"
