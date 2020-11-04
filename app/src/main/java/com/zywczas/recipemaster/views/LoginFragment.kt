@@ -14,58 +14,35 @@ import com.zywczas.recipemaster.utilities.showToast
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
-
+//todo wrzucic co sie da w view model
 class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
 
-    private lateinit var faceCallbackManager : CallbackManager
+    private lateinit var faceCallbackManager : CallbackManager //todo wrzucic w daggera
     private var isLoggedIn = false
+    private lateinit var profileTracker: ProfileTracker //todo chyba usunac
+    private lateinit var profile: Profile
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         faceCallbackManager = CallbackManager.Factory.create()
-        //todo niby tak tez mozna sprawdzic czy zalogowany
         val accessToken = AccessToken.getCurrentAccessToken()
-        val czyZalogowany = accessToken != null && accessToken.isExpired.not()
-        logD("zalogowany?: $czyZalogowany")
+        isLoggedIn = accessToken != null && accessToken.isExpired.not()
+        logD("zalogowany na start?: $isLoggedIn")
         setupLoginManagerCallback()
-
+        //profile tracker sciezka
+//        FacebookSdk.sdkInitialize(this.getApplicationContext()) - to kiedys bylo potrzebne, teraz deprecated,
+//        mowi ze samo sie wlacza przy aplikacji, np po to zeby byl czlowiek od razu zalogowany
+        //todo wrzucic w odpowiednie miejsce i przeanalizowac inicjalizacje, przy automatycznym zalogowaniu i jak po raz pierwszy
+        profile = Profile.getCurrentProfile()
+        val name = profile.name
+        val surname = profile.lastName
+        val firstName = profile.firstName
+        logD("imie: $firstName, nazwisko: $surname, cale imie: $name")
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupOnClickListeners()
-        setupUi()
-    }
-
-    private fun setupUi(){
-        speed_dial_login.inflate(R.menu.menu_speed_dial)
-    }
-
-    private fun setupOnClickListeners(){
-        speed_dial_login.setOnActionSelectedListener { item ->
-            when(item.id){
-                R.id.get_recipe_item -> {
-
-                    true
-                }
-                R.id.facebook_item -> {
-                    loginWithFacebook()
-                    true
-                }
-                else -> false
-            }
-        }
-    }
-
-    private fun loginWithFacebook(){
-        LoginManager.getInstance().logInWithReadPermissions(this, mutableListOf("email", "public_profile"))
-    }
-
-//todo You don't need a registerCallback for login to succeed, you can choose to follow current access token changes with the AccessTokenTracker class described below.
     private fun setupLoginManagerCallback(){
         //todo wrzucic w daggera
-    //todo to powinno byc w onCreate jezeli wogole potrzebne
-
         LoginManager.getInstance().registerCallback(
             faceCallbackManager,
             object : FacebookCallback<LoginResult> {
@@ -84,18 +61,47 @@ class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
 
                 override fun onError(error: FacebookException?) {
                     isLoggedIn = false
-                    if (error != null) {
-                        logD(error)
-                    }
-                    showToast("exception")
+                    error?.let { logD(it) }
+                    showToast("Problem with login to Facebook.")
                 }
 
             })
     }
 
+    //to jest potrzebne fejsbookowi, callback manager podaje dane do LoginManager
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         faceCallbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupUi()
+        setupOnClickListeners()
+    }
+
+    private fun setupUi(){
+        speed_dial_login.inflate(R.menu.menu_speed_dial)
+    }
+
+    private fun setupOnClickListeners(){
+        speed_dial_login.setOnActionSelectedListener { item ->
+            when(item.id){
+                R.id.get_recipe_item -> {
+
+                    true
+                }
+                R.id.facebook_item -> {
+                    loginWithFacebook() //todo dodac ifNotLoggedIn i sprawdzenie,
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun loginWithFacebook(){
+        LoginManager.getInstance().logInWithReadPermissions(this, mutableListOf("email", "public_profile"))
     }
 
 }
