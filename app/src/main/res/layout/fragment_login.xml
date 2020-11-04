@@ -59,19 +59,6 @@
             app:layout_constraintTop_toTopOf="@+id/view" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_main_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:src="@android:drawable/ic_input_add"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_recipes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,7 +81,7 @@
             app:layout_constraintEnd_toEndOf="@+id/fab_main_login"
             app:layout_constraintStart_toStartOf="@+id/fab_main_login"
             tools:src="@tools:sample/backgrounds/scenic" />
-<!--        todo dac elevation na teksty i okragle rogi-->
+        <!--        todo dac elevation na teksty i okragle rogi-->
 
         <TextView
             android:id="@+id/textView2"
@@ -119,6 +106,12 @@
             app:layout_constraintTop_toTopOf="@+id/fab_facebook" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.leinardi.android.speeddial.SpeedDialView
+        android:id="@+id/fab_main_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:sdMainFabClosedSrc="@drawable/ic_add_24_yellowish" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
