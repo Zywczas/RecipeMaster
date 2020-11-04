@@ -25,10 +25,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:layout_height="match_parent">
 
         <view
             android:id="@+id/view"
@@ -58,60 +55,22 @@
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/view" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_recipes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            android:src="@android:drawable/btn_star_big_on"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toTopOf="@+id/fab_facebook"
-            app:layout_constraintEnd_toEndOf="@+id/fab_facebook"
-            app:layout_constraintStart_toStartOf="@+id/fab_facebook" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_facebook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:clickable="true"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toTopOf="@+id/fab_main_login"
-            app:layout_constraintEnd_toEndOf="@+id/fab_main_login"
-            app:layout_constraintStart_toStartOf="@+id/fab_main_login"
-            tools:src="@tools:sample/backgrounds/scenic" />
         <!--        todo dac elevation na teksty i okragle rogi-->
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="Get the recipe"
-            android:textColor="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/fab_recipes"
-            app:layout_constraintEnd_toStartOf="@+id/fab_recipes"
-            app:layout_constraintTop_toTopOf="@+id/fab_recipes" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="Zaloguj przez Facebook'a"
-            android:textColor="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/fab_facebook"
-            app:layout_constraintEnd_toStartOf="@+id/fab_facebook"
-            app:layout_constraintTop_toTopOf="@+id/fab_facebook" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--    todo poprawic pozniej color background wszystkich guzikow i powiekszyc ikonki-->
+<!--    todo nie pokazuje calego tekstu zaloguj przez fejsa-->
     <com.leinardi.android.speeddial.SpeedDialView
-        android:id="@+id/fab_main_login"
+        android:id="@+id/speed_dial_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        app:sdMainFabClosedSrc="@drawable/ic_add_24_yellowish" />
+        app:sdMainFabClosedBackgroundColor="@color/cardview_light_background"
+        app:sdMainFabClosedSrc="@mipmap/ic_add_loginscreen"
+        app:sdMainFabOpenedSrc="@mipmap/ic_x_loginscreen"
+        app:sdUseReverseAnimationOnClose="true"
+        app:sdMainFabAnimationRotateAngle="360"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
