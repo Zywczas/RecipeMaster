@@ -4,23 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/destination_main_fragment">
+    app:startDestination="@id/destination_login">
 <!--    todo poustawiac labels-->
 <!-- todo pomyslec nad back stack dla akcji -->
 
-    <fragment
-        android:id="@+id/destination_main_fragment"
-        android:name="com.zywczas.recipemaster.views.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_to_login"
-            app:destination="@id/destination_login"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
     <fragment
         android:id="@+id/destination_login"
         android:name="com.zywczas.recipemaster.views.LoginFragment"

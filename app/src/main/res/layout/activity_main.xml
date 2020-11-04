@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.MainActivity">
+    <!--    todo dac layouty dla roznych orientation i screen size, moze tylko dla activity, a moze dla poszczegolnych fragmentow-->
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
