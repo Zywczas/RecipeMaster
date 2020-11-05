@@ -5,8 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
     app:startDestination="@id/destination_login">
-<!--    todo poustawiac labels-->
-<!-- todo pomyslec nad back stack dla akcji -->
 
     <fragment
         android:id="@+id/destination_login"
@@ -14,7 +12,7 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_to_cooking"
+            android:id="@+id/actionToCooking"
             app:destination="@id/destination_cooking"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -25,5 +23,12 @@
         android:id="@+id/destination_cooking"
         android:name="com.zywczas.recipemaster.views.CookingFragment"
         android:label="fragment_cooking"
-        tools:layout="@layout/fragment_cooking" />
+        tools:layout="@layout/fragment_cooking" >
+        <argument
+            android:name="user"
+            app:argType="string" />
+    </fragment>
 </navigation>
+
+    <!--    todo poustawiac labels-->
+    <!-- todo pomyslec nad back stack dla akcji -->

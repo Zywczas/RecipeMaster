@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
-    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme" />
+        </com.google.android.material.appbar.AppBarLayout>
 
         <view
             android:id="@+id/view"
@@ -41,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.4" />
-        <!--todo pousuwac warningi z layoutow-->
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -55,22 +54,20 @@
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/view" />
 
-        <!--        todo dac elevation na teksty i okragle rogi-->
+        <!--    todo poprawic pozniej color background wszystkich guzikow i powiekszyc ikonki - pewnie paddding-->
+        <!--    todo nie pokazuje calego tekstu zaloguj przez fejsa-->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    todo poprawic pozniej color background wszystkich guzikow i powiekszyc ikonki - pewnie paddding-->
-<!--    todo nie pokazuje calego tekstu zaloguj przez fejsa-->
     <com.leinardi.android.speeddial.SpeedDialView
         android:id="@+id/speed_dial_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        app:sdMainFabClosedBackgroundColor="@color/cardview_light_background"
+        app:sdMainFabAnimationRotateAngle="360"
         app:sdMainFabClosedSrc="@mipmap/ic_add_loginscreen"
         app:sdMainFabOpenedSrc="@mipmap/ic_x_loginscreen"
-        app:sdUseReverseAnimationOnClose="true"
-        app:sdMainFabAnimationRotateAngle="360"/>
+        app:sdUseReverseAnimationOnClose="true" />
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

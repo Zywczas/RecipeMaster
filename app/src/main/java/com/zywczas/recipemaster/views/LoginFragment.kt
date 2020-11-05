@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
@@ -20,7 +21,8 @@ class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
     private lateinit var faceCallbackManager : CallbackManager //todo wrzucic w daggera
     private var isLoggedIn = false
     private lateinit var profileTracker: ProfileTracker //todo chyba usunac
-    private lateinit var profile: Profile
+    private var profile: Profile? = null
+    private var name: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,10 +37,8 @@ class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
 //        mowi ze samo sie wlacza przy aplikacji, np po to zeby byl czlowiek od razu zalogowany
         //todo wrzucic w odpowiednie miejsce i przeanalizowac inicjalizacje, przy automatycznym zalogowaniu i jak po raz pierwszy
         profile = Profile.getCurrentProfile()
-        val name = profile.name
-        val surname = profile.lastName
-        val firstName = profile.firstName
-        logD("imie: $firstName, nazwisko: $surname, cale imie: $name")
+        name = profile?.name
+        logD("cale imie: $name")
     }
 
     private fun setupLoginManagerCallback(){
@@ -88,7 +88,7 @@ class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
         speed_dial_login.setOnActionSelectedListener { item ->
             when(item.id){
                 R.id.get_recipe_item -> {
-
+                    goToCookingFragment()
                     true
                 }
                 R.id.facebook_item -> {
@@ -98,6 +98,14 @@ class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
                 else -> false
             }
         }
+    }
+
+    private fun goToCookingFragment(){
+        //todo dac sprawdzenie czy jest internet i czy zalogowany i czy jest profil
+        //chwilowe rozwiazanie
+        val imie = name ?: "imie nie zaladowane"
+        val directions = LoginFragmentDirections.actionToCooking(imie)
+        findNavController().navigate(directions)
     }
 
     private fun loginWithFacebook(){
