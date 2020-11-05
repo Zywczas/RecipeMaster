@@ -52,8 +52,8 @@ class CookingFragment @Inject constructor(
     private fun updateUI(recipe: Recipe){
         recipe.title?.let { food_name_textView.text = "$it:" }
         food_description_textView.text = recipe.description
-        //todo ingredients_list_textView.text =
-        //todo preparing_steps_textView.text =
+        ingredients_list_textView.text = recipe.ingredientsDescription
+        preparing_steps_textView.text = recipe.preparingDescription
         recipe.images?.get(0)?.let {
             glide.load(it)
                 .into(food1_imageView)

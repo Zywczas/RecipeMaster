@@ -20,7 +20,10 @@ class CookingRepository @Inject constructor(
         val apiSingle = restApi.getRecipe()
         return apiSingle
             .subscribeOn(Schedulers.io())
-            .map { Resource.success(it) }
+            .map { recipe ->
+                recipe.convertIngredientsListToDescription()
+                recipe.convertPreparingStepsToDescription()
+                Resource.success(recipe) }
             .onErrorReturn { getError(it) }
             .toFlowable()
     }
