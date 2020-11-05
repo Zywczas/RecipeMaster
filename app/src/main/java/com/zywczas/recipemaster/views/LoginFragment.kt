@@ -92,7 +92,7 @@ class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
                     true
                 }
                 R.id.facebook_item -> {
-                    loginWithFacebook() //todo dodac ifNotLoggedIn i sprawdzenie,
+                    loginWithFacebook() //todo dodac ifNotLoggedIn i sprawdzenie internetu,
                     true
                 }
                 else -> false

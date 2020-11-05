@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Recipe Master</string>
+    <string name="connection_problem">"Problem with internet. Check your connection and try again."</string>
+    <string name="click_to_refresh_connection">"Check your connection and click here to refresh."</string>
+    <string name="http_error_recipe">"Problem with downloading recipe. Error code: "</string>
+    <string name="general_restapi_error">"Problem with contacting with server. Check connection and try again."</string>
 
 
 

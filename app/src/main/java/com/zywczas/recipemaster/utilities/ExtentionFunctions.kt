@@ -9,6 +9,6 @@ fun Fragment.showToast(message: String) =
 
 fun <T> lazyAndroid(initializer: () -> T) : Lazy<T> = lazy(LazyThreadSafetyMode.NONE, initializer)
 
-private val tag = "RecipeMaster"
+private const val tag = "RecipeMaster"
 fun logD(msg : String) = Log.d(tag, msg)
 fun logD(e : Throwable) = Log.d(tag, e.toString())
