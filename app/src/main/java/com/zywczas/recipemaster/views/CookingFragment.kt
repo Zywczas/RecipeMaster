@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.RequestManager
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.model.Recipe
@@ -22,11 +25,11 @@ class CookingFragment @Inject constructor(
 
     private val viewModel : CookingViewModel by viewModels { viewModelFactory }
     private val user by lazyAndroid { requireArguments().let { CookingFragmentArgs.fromBundle(it).user } }
+    private val appBarConfig by lazyAndroid { AppBarConfiguration(setOf(R.id.destination_login)) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //todo ustawic toolbar i strzalke
+        toolbar_cooking.setupWithNavController(findNavController(), appBarConfig)
         logD("zalogowany: $user")
         //todo dac snackbar na dole
         setupObserver()
@@ -50,7 +53,9 @@ class CookingFragment @Inject constructor(
 
     @SuppressLint("SetTextI18n")
     private fun updateUI(recipe: Recipe){
-        recipe.title?.let { food_name_textView.text = "$it:" }
+        recipe.title?.let {
+            toolbar_cooking.title = "$it ${getString(R.string.recipe)}"
+            food_name_textView.text = "$it:" }
         food_description_textView.text = recipe.description
         ingredients_list_textView.text = recipe.ingredientsDescription
         preparing_steps_textView.text = recipe.preparingDescription
@@ -73,7 +78,7 @@ class CookingFragment @Inject constructor(
     }
 
     private fun setupOnClickListeners(){
-        //todo
+        //todo zapisywanie obrazkow
     }
 
     private fun getRecipeOnViewModelInit(){

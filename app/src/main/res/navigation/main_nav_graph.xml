@@ -9,21 +9,19 @@
     <fragment
         android:id="@+id/destination_login"
         android:name="com.zywczas.recipemaster.views.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/actionToCooking"
             app:destination="@id/destination_cooking"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/destination_cooking"
         android:name="com.zywczas.recipemaster.views.CookingFragment"
-        android:label="fragment_cooking"
-        tools:layout="@layout/fragment_cooking" >
+        tools:layout="@layout/fragment_cooking">
         <argument
             android:name="user"
             app:argType="string" />

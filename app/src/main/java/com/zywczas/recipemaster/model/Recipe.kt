@@ -32,14 +32,6 @@ data class Recipe(
     lateinit var preparingDescription : String
         private set
 
-//    fun convertIngredientsListToDescription(){
-//        if (ingredientsList != null) {
-//            ingredientsDescription = ""
-//            for (ing in ingredientsList){
-//                ingredientsDescription = "$ingredientsDescription- $ing\n"
-//            }
-//        }
-//    }
 //todo pomyslec nad rozbiciem
     @Suppress("LiftReturnOrAssignment")
     fun convertIngredientsListToDescription(){
