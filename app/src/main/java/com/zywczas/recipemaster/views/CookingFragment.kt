@@ -36,12 +36,16 @@ class CookingFragment @Inject constructor(
 
     private fun setupObserver(){
         viewModel.recipe.observe(viewLifecycleOwner) { resource ->
-            progressBar_cooking.isVisible = false
+            showProgressBar(false)
             when (resource.status) {
                 Status.SUCCESS -> updateUI(resource.data!!)
                 Status.ERROR -> showError(resource.message!!)
             }
         }
+    }
+
+    private fun showProgressBar(visible : Boolean){
+        progressBar_cooking.isVisible = visible
     }
 
     @SuppressLint("SetTextI18n")
@@ -73,6 +77,7 @@ class CookingFragment @Inject constructor(
     }
 
     private fun getRecipeOnViewModelInit(){
+        showProgressBar(true)
         viewModel.getRecipeOnViewModelInit()
     }
 
