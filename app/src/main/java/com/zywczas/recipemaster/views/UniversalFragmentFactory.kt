@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentFactory
 import javax.inject.Inject
 import javax.inject.Provider
 
-class UniversalFragmentsFactory @Inject constructor(
+class UniversalFragmentFactory @Inject constructor(
     private val creators: Map<Class<out Fragment>, @JvmSuppressWildcards Provider<Fragment>>
 ) : FragmentFactory(){
 

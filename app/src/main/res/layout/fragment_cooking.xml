@@ -43,19 +43,6 @@
             tools:visibility="visible">
 
             <TextView
-                android:id="@+id/connection_problem_textView_cooking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/click_to_refresh_connection"
-                android:textColor="@color/design_default_color_error"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ingredients_list_textView"
-                tools:visibility="visible" />
-
-            <TextView
                 android:id="@+id/food_name_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

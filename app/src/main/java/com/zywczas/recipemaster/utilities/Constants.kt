@@ -6,3 +6,5 @@ package com.zywczas.recipemaster.utilities
 //todo dodac przygaszanie ekranu w tle jak klikam speed dial
 
 //todo przejrzec wszystkie klasy
+
+//sprobowac pobrac obrazek z fejsa i wkleic w snackbar

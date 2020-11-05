@@ -9,7 +9,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var fragmentFactory: UniversalFragmentsFactory
+    lateinit var fragmentFactory: UniversalFragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
