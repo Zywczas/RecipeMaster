@@ -1,174 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:theme="@style/ToolbarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ToolbarTheme" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/food_name_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="food name:" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/food_description_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="45dp"
-                android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/food_name_textView"
-                tools:text="food description food description food description food description food description food description food description " />
+                <TextView
+                    android:id="@+id/food_name_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="food name:" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:text="Ingredients:"
-                android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/food_description_textView" />
+                <TextView
+                    android:id="@+id/food_description_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="45dp"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/food_name_textView"
+                    tools:text="food description food description food description food description food description food description food description " />
 
-            <TextView
-                android:id="@+id/ingredients_list_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="45dp"
-                android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6"
-                tools:text='"-1 szklanka ciepłej wody",  \n"-50g świeżych drożdży",   ' />
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Ingredients:"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/food_description_textView" />
 
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:text="Preparing:"
-                android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ingredients_list_textView" />
+                <TextView
+                    android:id="@+id/ingredients_list_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="45dp"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6"
+                    tools:text='"-1 szklanka ciepłej wody",  \n"-50g świeżych drożdży",   ' />
 
-            <TextView
-                android:id="@+id/preparing_steps_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="45dp"
-                android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8"
-                tools:text='"1. Suche składniki dokładnie mieszamy.",  \n"2. Drożdże zalawamy ciepłą wodą, olejem i cukrem. Odstawiamy do wyrośnięcia."' />
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Preparing:"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ingredients_list_textView" />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:text="Images:"
-                android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/preparing_steps_textView" />
+                <TextView
+                    android:id="@+id/preparing_steps_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="45dp"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8"
+                    tools:text='"1. Suche składniki dokładnie mieszamy.",  \n"2. Drożdże zalawamy ciepłą wodą, olejem i cukrem. Odstawiamy do wyrośnięcia."' />
 
-            <ImageView
-                android:id="@+id/food1_imageView"
-                android:layout_width="150dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="8dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toStartOf="@+id/food2_imageView"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10"
-                tools:src="@tools:sample/avatars" />
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Images:"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/preparing_steps_textView" />
 
-            <ImageView
-                android:id="@+id/food2_imageView"
-                android:layout_width="150dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="@+id/food1_imageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/food1_imageView"
-                app:layout_constraintTop_toTopOf="@+id/food1_imageView"
-                tools:src="@tools:sample/avatars" />
+                <ImageView
+                    android:id="@+id/food1_imageView"
+                    android:layout_width="150dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toStartOf="@+id/food2_imageView"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10"
+                    tools:src="@tools:sample/avatars" />
 
-            <ImageView
-                android:id="@+id/food3_imageView"
-                android:layout_width="150dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="16dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="@+id/food1_imageView"
-                app:layout_constraintStart_toStartOf="@+id/food1_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/food1_imageView"
-                tools:srcCompat="@tools:sample/avatars" />
+                <ImageView
+                    android:id="@+id/food2_imageView"
+                    android:layout_width="150dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="@+id/food1_imageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/food1_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/food1_imageView"
+                    tools:src="@tools:sample/avatars" />
 
-            <ProgressBar
-                android:id="@+id/progressBar_cooking"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
+                <ImageView
+                    android:id="@+id/food3_imageView"
+                    android:layout_width="150dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/food1_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/food1_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/food1_imageView"
+                    tools:src="@tools:sample/avatars" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+                <ProgressBar
+                    android:id="@+id/progressBar_cooking"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
