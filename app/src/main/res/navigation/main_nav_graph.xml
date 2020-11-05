@@ -27,6 +27,3 @@
             app:argType="string" />
     </fragment>
 </navigation>
-
-    <!--    todo poustawiac labels-->
-    <!-- todo pomyslec nad back stack dla akcji -->

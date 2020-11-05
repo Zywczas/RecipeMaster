@@ -4,12 +4,15 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.RequestManager
+import com.google.android.material.snackbar.Snackbar
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.model.Recipe
 import com.zywczas.recipemaster.utilities.*
@@ -29,12 +32,12 @@ class CookingFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toolbar_cooking.setupWithNavController(findNavController(), appBarConfig)
-        logD("zalogowany: $user")
-        //todo dac snackbar na dole
         setupObserver()
-        setupOnClickListeners()
         getRecipeOnViewModelInit()
+        val welcomeMsg = "${getString(R.string.logged_as)} $user"
+        showSnackbar(welcomeMsg)
+        setupOnClickListeners()
+        toolbar_cooking.setupWithNavController(findNavController(), appBarConfig)
     }
 
     private fun setupObserver(){
@@ -73,8 +76,8 @@ class CookingFragment @Inject constructor(
         }
     }
 
-    private fun showError(msg: Event<String>){
-        msg.getContentIfNotHandled()?.let { showToast(it) }
+    private fun showError(msg: Event<Int>){
+        msg.getContentIfNotHandled()?.let { showSnackbar(getString(it)) }
     }
 
     private fun setupOnClickListeners(){
@@ -84,6 +87,16 @@ class CookingFragment @Inject constructor(
     private fun getRecipeOnViewModelInit(){
         showProgressBar(true)
         viewModel.getRecipeOnViewModelInit()
+    }
+
+    private fun showSnackbar(msg: String){
+        val color = ContextCompat.getColor(requireContext(), R.color.darkGrey)
+        val snackbar = Snackbar.make(requireView(), msg, Snackbar.LENGTH_LONG)
+            .setBackgroundTint(color)
+        val view = snackbar.view
+        val textView = view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+        textView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        snackbar.show()
     }
 
 }

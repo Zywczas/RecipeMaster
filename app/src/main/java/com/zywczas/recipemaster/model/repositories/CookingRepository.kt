@@ -12,7 +12,6 @@ import retrofit2.HttpException
 import javax.inject.Inject
 
 class CookingRepository @Inject constructor(
-    private val app: Application,
     private val restApi : RecipeRestApiService
 ) {
 
@@ -31,11 +30,11 @@ class CookingRepository @Inject constructor(
     private fun getError(e: Throwable) : Resource<Recipe>{
         return if (e is HttpException) {
             logD(e)
-            val httpError = app.applicationContext.getString(R.string.http_error_recipe)
-            Resource.error(httpError + e.code().toString(), null)
+            val httpError = R.string.http_error_recipe
+            Resource.error(httpError, null)
         } else {
             logD(e)
-            val generalError= app.applicationContext.getString(R.string.general_restapi_error)
+            val generalError= R.string.general_restapi_error
             Resource.error(generalError, null)
         }
     }
