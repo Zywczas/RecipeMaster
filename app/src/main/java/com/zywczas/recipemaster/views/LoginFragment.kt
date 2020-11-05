@@ -2,13 +2,16 @@ package com.zywczas.recipemaster.views
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.android.material.snackbar.Snackbar
+import com.zywczas.recipemaster.NetworkCheck
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.utilities.logD
 import com.zywczas.recipemaster.utilities.showToast
@@ -16,13 +19,12 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
 //todo wrzucic co sie da w view model
-class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
+class LoginFragment @Inject constructor(private val network: NetworkCheck) : Fragment(R.layout.fragment_login) {
 
     private lateinit var faceCallbackManager : CallbackManager //todo wrzucic w daggera
     private var isLoggedIn = false
-    private lateinit var profileTracker: ProfileTracker //todo chyba usunac
     private var profile: Profile? = null
-    private var name: String? = null
+    private var userName: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,8 +39,8 @@ class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
 //        mowi ze samo sie wlacza przy aplikacji, np po to zeby byl czlowiek od razu zalogowany
         //todo wrzucic w odpowiednie miejsce i przeanalizowac inicjalizacje, przy automatycznym zalogowaniu i jak po raz pierwszy
         profile = Profile.getCurrentProfile()
-        name = profile?.name
-        logD("cale imie: $name")
+        userName = profile?.name
+        //todo chwilowo
     }
 
     private fun setupLoginManagerCallback(){
@@ -103,13 +105,23 @@ class LoginFragment @Inject constructor() : Fragment(R.layout.fragment_login) {
     private fun goToCookingFragment(){
         //todo dac sprawdzenie czy jest internet i czy zalogowany i czy jest profil
         //chwilowe rozwiazanie
-        val imie = name ?: "imie nie zaladowane"
-        val directions = LoginFragmentDirections.actionToCooking(imie)
+        val name = userName ?: "imie nie zaladowane"
+        val directions = LoginFragmentDirections.actionToCooking(name)
         findNavController().navigate(directions)
     }
 
     private fun loginWithFacebook(){
         LoginManager.getInstance().logInWithReadPermissions(this, mutableListOf("email", "public_profile"))
+    }
+
+    private fun showSnackbar(msg: String){
+        val color = ContextCompat.getColor(requireContext(), R.color.darkGrey)
+        val snackbar = Snackbar.make(requireView(), msg, Snackbar.LENGTH_LONG)
+            .setBackgroundTint(color)
+        val view = snackbar.view
+        val textView = view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+        textView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        snackbar.show()
     }
 
 }

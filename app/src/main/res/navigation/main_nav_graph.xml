@@ -23,7 +23,7 @@
         android:name="com.zywczas.recipemaster.views.CookingFragment"
         tools:layout="@layout/fragment_cooking">
         <argument
-            android:name="user"
+            android:name="userName"
             app:argType="string" />
     </fragment>
 </navigation>

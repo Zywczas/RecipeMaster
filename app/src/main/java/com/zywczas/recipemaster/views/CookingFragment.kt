@@ -27,14 +27,14 @@ class CookingFragment @Inject constructor(
 ) : Fragment(R.layout.fragment_cooking) {
 
     private val viewModel : CookingViewModel by viewModels { viewModelFactory }
-    private val user by lazyAndroid { requireArguments().let { CookingFragmentArgs.fromBundle(it).user } }
+    private val userName by lazyAndroid { requireArguments().let { CookingFragmentArgs.fromBundle(it).userName } }
     private val appBarConfig by lazyAndroid { AppBarConfiguration(setOf(R.id.destination_login)) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObserver()
         getRecipeOnViewModelInit()
-        val welcomeMsg = "${getString(R.string.logged_as)} $user"
+        val welcomeMsg = "${getString(R.string.logged_as)} $userName"
         showSnackbar(welcomeMsg)
         setupOnClickListeners()
         toolbar_cooking.setupWithNavController(findNavController(), appBarConfig)
@@ -80,15 +80,6 @@ class CookingFragment @Inject constructor(
         msg.getContentIfNotHandled()?.let { showSnackbar(getString(it)) }
     }
 
-    private fun setupOnClickListeners(){
-        //todo zapisywanie obrazkow
-    }
-
-    private fun getRecipeOnViewModelInit(){
-        showProgressBar(true)
-        viewModel.getRecipeOnViewModelInit()
-    }
-
     private fun showSnackbar(msg: String){
         val color = ContextCompat.getColor(requireContext(), R.color.darkGrey)
         val snackbar = Snackbar.make(requireView(), msg, Snackbar.LENGTH_LONG)
@@ -97,6 +88,15 @@ class CookingFragment @Inject constructor(
         val textView = view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
         textView.textAlignment = View.TEXT_ALIGNMENT_CENTER
         snackbar.show()
+    }
+
+    private fun setupOnClickListeners(){
+        //todo zapisywanie obrazkow
+    }
+
+    private fun getRecipeOnViewModelInit(){
+        showProgressBar(true)
+        viewModel.getRecipeOnViewModelInit()
     }
 
 }
