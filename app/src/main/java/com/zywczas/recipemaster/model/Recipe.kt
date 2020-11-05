@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-data class Food(
+data class Recipe(
     @SerializedName("title")
     @Expose
     val title: String?,

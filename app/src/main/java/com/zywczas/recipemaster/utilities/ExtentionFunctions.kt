@@ -11,4 +11,4 @@ fun <T> lazyAndroid(initializer: () -> T) : Lazy<T> = lazy(LazyThreadSafetyMode.
 
 private val tag = "RecipeMaster"
 fun logD(msg : String) = Log.d(tag, msg)
-fun logD(e : Exception) = Log.d(tag, e.toString())
+fun logD(e : Throwable) = Log.d(tag, e.toString())

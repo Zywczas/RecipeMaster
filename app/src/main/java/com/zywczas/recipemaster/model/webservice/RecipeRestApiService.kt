@@ -1,7 +1,8 @@
 package com.zywczas.recipemaster.model.webservice
 
-import com.zywczas.recipemaster.model.Food
+import com.zywczas.recipemaster.model.Recipe
 import io.reactivex.rxjava3.core.Single
+import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.http.GET
 
@@ -10,7 +11,8 @@ import retrofit2.http.GET
  */
 interface RecipeRestApiService {
 
+    @Throws(HttpException::class)
     @GET("test/info.php")
-    fun getRecipe() : Single<Response<Food>>
+    fun getRecipe() : Single<Recipe>
 
 }
