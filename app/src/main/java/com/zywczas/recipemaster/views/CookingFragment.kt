@@ -28,7 +28,7 @@ import javax.inject.Inject
 class CookingFragment @Inject constructor(
     private val viewModelFactory : UniversalViewModelFactory,
     private val glide : RequestManager
-) : Fragment(R.layout.fragment_cooking) {
+) : Fragment(R.layout.fragment_cooking), SaveImageDialog.SaveImageListener {
 
     private val viewModel : CookingViewModel by viewModels { viewModelFactory }
     private val userName by lazyAndroid { requireArguments().let { CookingFragmentArgs.fromBundle(it).userName } }
@@ -106,7 +106,19 @@ class CookingFragment @Inject constructor(
     }
 
     private val imageClickListener = View.OnClickListener {
-        SaveImageDialog().show(childFragmentManager, "SaveImage")
+        areYouSureDialog(it.id)
+    }
+
+    private fun areYouSureDialog(viewId : Int){
+        val dialog = SaveImageDialog()
+        val bundle = Bundle()
+        bundle.putInt(EXTRA_VIEW_ID, viewId)
+        dialog.arguments = bundle
+        dialog.show(childFragmentManager, "SaveImage")
+    }
+
+    override fun saveImage(imageId: Int) {
+
     }
 
 }
