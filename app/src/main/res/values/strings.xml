@@ -11,6 +11,9 @@
     <string name="no_image_to_save">There is no image to save.</string>
     <string name="image_saving_error">Could not save the image. Try again.</string>
     <string name="image_saved">Image saved!</string>
+    <string name="need_for_network">You need internet connection to proceed. Check your connection.</string>
+    <string name="need_for_login">You need to be logged in to proceed.</string>
+    <string name="you_are_logged_in">Your are logged in already.</string>
 
 <!--    Facebook -->
     <string name="facebook_app_id">666053657437502</string>

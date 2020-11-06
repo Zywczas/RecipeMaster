@@ -4,6 +4,9 @@ import android.app.Application
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
+import com.facebook.CallbackManager
+import com.facebook.login.LoginFragment
+import com.facebook.login.LoginManager
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.model.webservice.RecipeRestApiService
 import dagger.Module
@@ -40,6 +43,14 @@ object AppModule {
     fun provideGlide(app: Application, options: RequestOptions) : RequestManager =
         Glide.with(app)
             .setDefaultRequestOptions(options)
+
+    @Provides
+    @Singleton
+    fun provideFacebookLoginManager() : LoginManager = LoginManager.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideFacebookCallbackManager() : CallbackManager = CallbackManager.Factory.create()
 
 
 }

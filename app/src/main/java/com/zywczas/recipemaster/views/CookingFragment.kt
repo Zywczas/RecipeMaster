@@ -65,14 +65,8 @@ class CookingFragment @Inject constructor(
     }
 
     private fun verifyStoragePermissions() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                permissions[0]
-            ) == PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                permissions[1]
-            ) == PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(requireContext(),permissions[0]) == PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(requireContext(),permissions[1]) == PackageManager.PERMISSION_GRANTED
         ) {
             arePermissionsGranted = true
         }
@@ -199,10 +193,7 @@ class CookingFragment @Inject constructor(
         val fileName = "${timeStamp}_$photoName"
         glide.load(requestedImageUrl)
             .into(object : CustomTarget<Drawable>() {
-                override fun onResourceReady(
-                    resource: Drawable,
-                    transition: Transition<in Drawable>?
-                ) {
+                override fun onResourceReady(resource: Drawable,transition: Transition<in Drawable>?) {
                     val bitmap = resource.toBitmap()
                     saveImageToGallery(bitmap, fileName)
                 }

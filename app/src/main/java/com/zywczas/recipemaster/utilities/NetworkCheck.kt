@@ -1,4 +1,4 @@
-package com.zywczas.recipemaster
+package com.zywczas.recipemaster.utilities
 
 import android.app.Application
 import android.content.Context
@@ -20,10 +20,7 @@ class NetworkCheck @Inject constructor(private val app: Application) {
     private fun registerNetworkCallback() {
         val cm =
             app.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        cm.registerDefaultNetworkCallback(object :
-            ConnectivityManager.NetworkCallback() {
-
+        cm.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
                 isConnected = true

@@ -1,23 +1,14 @@
 package com.zywczas.recipemaster.viewmodels
 
 import android.app.Application
-import android.content.ContentValues
-import android.graphics.Bitmap
-import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.RequestManager
-import com.zywczas.recipemaster.NetworkCheck
-import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.model.Recipe
 import com.zywczas.recipemaster.model.repositories.CookingRepository
 import com.zywczas.recipemaster.utilities.Resource
-import java.io.OutputStream
 import javax.inject.Inject
 
 class CookingViewModel @Inject constructor(
@@ -45,22 +36,45 @@ class CookingViewModel @Inject constructor(
         }
     }
 
+//    private fun downloadAndSaveImage() {
+//        val timeStamp = SimpleDateFormat("yyMMdd_HHmmss", Locale.getDefault()).format(Date())
+//        val photoName = requestedImageUrl!!.substring(requestedImageUrl!!.lastIndexOf("/") + 1)
+//        val fileName = "${timeStamp}_$photoName"
+//        glide.load(requestedImageUrl)
+//            .into(object : CustomTarget<Drawable>() {
+//                override fun onResourceReady(
+//                    resource: Drawable,
+//                    transition: Transition<in Drawable>?
+//                ) {
+//                    val bitmap = resource.toBitmap()
+//                    saveImageToGallery(bitmap, fileName)
+//                }
+//
+//                override fun onLoadCleared(placeholder: Drawable?) {
+//                }
+//
+//                override fun onLoadFailed(errorDrawable: Drawable?) {
+//                    showSnackbar(getString(R.string.image_saving_error))
+//                }
+//            })
+//    }
+
 //    private fun saveImageToGallery(bitmap: Bitmap, fileName: String) {
 //        var fos: OutputStream? = null
-//        app.applicationContext.contentResolver?.also { resolver ->
 //            val contentValues = ContentValues().apply {
 //                put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
 //                put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 //                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
 //                    put(MediaStore.MediaColumns.IS_PENDING, 1)
 //                }
 //            }
-//            val imageUri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-//            fos = imageUri?.let { resolver.openOutputStream(it) }
-//        }
+//            val imageUri: Uri? =
+//                app.applicationContext.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+//            fos = imageUri?.let { app.applicationContext.contentResolver.openOutputStream(it) }
+//
 //        fos?.use { bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it) }
-//        showSnackbar(getString(R.string.image_saved))
+//        showInfoDialog(getString(R.string.image_saved))
 //    }
 
 
