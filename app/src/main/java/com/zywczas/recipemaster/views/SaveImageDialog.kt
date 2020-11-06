@@ -17,13 +17,13 @@ import kotlinx.android.synthetic.main.dialog_save_image.*
 class SaveImageDialog : DialogFragment() {
 
     private var arePermissionsGranted = false
-    private val storageRequest by lazyAndroid { 777 }
+    private val storageRequestCode by lazyAndroid { 777 }
     private val permissions by lazyAndroid { arrayOf(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.READ_EXTERNAL_STORAGE
     )}
     private lateinit var saveImageListener: SaveImageListener
-    private val imageId by lazyAndroid { arguments?.get(EXTRA_VIEW_ID) as? Int }
+    private val imageIndex by lazyAndroid { arguments?.get(EXTRA_VIEW_INDEX) as? Int }
 
     interface SaveImageListener {
         fun saveImage(viewId : Int)
@@ -32,12 +32,12 @@ class SaveImageDialog : DialogFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         saveImageListener = context as SaveImageListener
-        logD("przed null check: dialog pobiera view id: $imageId")
-        if (imageId == null){
+        logD("przed null check: dialog pobiera view id: $imageIndex")
+        if (imageIndex == null){
             logD("No arguments passed to dialog. Dialog closed in onAttach().")
             dialog?.dismiss()
         }
-        logD("po null check: dialog pobiera view id: $imageId")
+        logD("po null check: dialog pobiera view id: $imageIndex")
     }
 
     override fun onCreateView(
@@ -69,7 +69,7 @@ class SaveImageDialog : DialogFragment() {
 
     private val yesClick = View.OnClickListener {
         if (arePermissionsGranted){
-            saveImageListener.saveImage(imageId!!)
+            saveImageListener.saveImage(imageIndex!!)
             dialog?.dismiss()
         } else {
             askForPermissionsAndSavePhoto()
@@ -77,7 +77,7 @@ class SaveImageDialog : DialogFragment() {
     }
 
     private fun askForPermissionsAndSavePhoto() {
-        ActivityCompat.requestPermissions(requireActivity(), permissions, storageRequest)
+        ActivityCompat.requestPermissions(requireActivity(), permissions, storageRequestCode)
     }
 
     override fun onRequestPermissionsResult(
@@ -86,12 +86,12 @@ class SaveImageDialog : DialogFragment() {
         grantResults: IntArray
     ) {
         when(requestCode){
-            storageRequest -> {
+            storageRequestCode -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                    //todo raczej nie potrzebne arePermissionsGranted = true
                     logD("permission granted: ${permissions[0]}")
                     logD("permission granted: ${permissions[1]}")
-                    saveImageListener.saveImage(imageId!!)
+                    saveImageListener.saveImage(imageIndex!!)
                     dialog?.dismiss()
                 } else {
                     showToast(getString(R.string.permission_warning))

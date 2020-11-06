@@ -1,6 +1,6 @@
 package com.zywczas.recipemaster.utilities
 
-const val EXTRA_VIEW_ID = "view id extra"
+const val EXTRA_VIEW_INDEX = "view id extra"
 
 ////todo usunac nieuzywane importy
 //todo dodac przygaszanie ekranu w tle jak klikam speed dial

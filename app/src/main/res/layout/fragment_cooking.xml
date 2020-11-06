@@ -109,14 +109,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/preparing_steps_textView" />
 
                 <ImageView
-                    android:id="@+id/food1_imageView"
+                    android:id="@+id/food0_imageView"
                     android:layout_width="150dp"
                     android:layout_height="120dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="8dp"
                     android:scaleType="centerCrop"
-                    app:layout_constraintEnd_toStartOf="@+id/food2_imageView"
+                    android:tag="0"
+                    app:layout_constraintEnd_toStartOf="@+id/food1_imageView"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
@@ -124,30 +125,32 @@
                     tools:src="@tools:sample/avatars" />
 
                 <ImageView
-                    android:id="@+id/food2_imageView"
+                    android:id="@+id/food1_imageView"
                     android:layout_width="150dp"
                     android:layout_height="120dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="@+id/food1_imageView"
+                    android:tag="1"
+                    app:layout_constraintBottom_toBottomOf="@+id/food0_imageView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/food1_imageView"
-                    app:layout_constraintTop_toTopOf="@+id/food1_imageView"
+                    app:layout_constraintStart_toEndOf="@+id/food0_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/food0_imageView"
                     tools:src="@tools:sample/avatars" />
 
                 <ImageView
-                    android:id="@+id/food3_imageView"
+                    android:id="@+id/food2_imageView"
                     android:layout_width="150dp"
                     android:layout_height="120dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:scaleType="centerCrop"
+                    android:tag="2"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/food1_imageView"
-                    app:layout_constraintStart_toStartOf="@+id/food1_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/food1_imageView"
+                    app:layout_constraintEnd_toEndOf="@+id/food0_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/food0_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/food0_imageView"
                     tools:src="@tools:sample/avatars" />
 
                 <ProgressBar
