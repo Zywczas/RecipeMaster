@@ -66,14 +66,8 @@ class CookingFragment @Inject constructor(
     }
 
     private fun verifyStoragePermissions() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                permissions[0]
-            ) == PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                permissions[1]
-            ) == PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(requireContext(),permissions[0]) == PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(requireContext(),permissions[1]) == PackageManager.PERMISSION_GRANTED
         ) {
             arePermissionsGranted = true
         }
@@ -195,7 +189,6 @@ class CookingFragment @Inject constructor(
     }
 
     private fun downloadAndSaveImage() {
-        showProgressBar(true)
         val timeStamp = SimpleDateFormat("yyMMdd_HHmmss", Locale.getDefault()).format(Date())
         val photoName = requestedImageUrl!!.substring(requestedImageUrl!!.lastIndexOf("/") + 1)
         val fileName = "${timeStamp}_$photoName"
@@ -210,7 +203,6 @@ class CookingFragment @Inject constructor(
                 }
 
                 override fun onLoadFailed(errorDrawable: Drawable?) {
-                    showProgressBar(false)
                     showSnackbar(getString(R.string.image_saving_error))
                 }
             })
@@ -218,87 +210,21 @@ class CookingFragment @Inject constructor(
 
     private fun saveImageToGallery(bitmap: Bitmap, fileName: String) {
         var fos: OutputStream? = null
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
             context?.contentResolver?.also { resolver ->
                 val contentValues = ContentValues().apply {
                     put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
                     put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
-                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+                        put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                        put(MediaStore.MediaColumns.IS_PENDING, 1)
+                    }
                 }
                 val imageUri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
                 fos = imageUri?.let { resolver.openOutputStream(it) }
             }
-        } else {
-            val imagesDir = Environment.getExternalStoragePublicDirectory((Environment.DIRECTORY_PICTURES))
-            val image = File(imagesDir, fileName)
-            fos = FileOutputStream(image)
-        }
-        fos?.use { bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it) }  //todo tutaj dopiero jest zapisywanie
+        fos?.use { bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it) }
         showSnackbar(getString(R.string.image_saved))
-        showProgressBar(false)
     }
-
-
-    private fun saveToStorage(image: Bitmap, fos: OutputStream) {
-        image.compress(Bitmap.CompressFormat.JPEG, 100, fos)
-        fos.close()
-        showSnackbar(getString(R.string.image_saved))
-        showProgressBar(false)
-
-    }
-
-//todo jak juz bedzie dzialac to sprobowac wrzucic to w dialog
-//    private fun saveImageToGallery(){
-//        val dirPath = Environment.getExternalStorageDirectory().absolutePath + "/" //todo poprawic...
-//        val dir = File(dirPath)
-//        val timeStamp = SimpleDateFormat("yyMMdd_HHmmss", Locale.getDefault()).format(Date())
-//        val photoName = requestedImageUrl!!.substring(requestedImageUrl!!.lastIndexOf("/") + 1)
-//        val fileName = "${timeStamp}_$photoName"
-//        glide.load(requestedImageUrl).into(object : CustomTarget<Drawable>(){
-//            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-//                showProgressBar(true)
-//                val bitmap = resource.toBitmap()
-//                saveToStorage(bitmap, dir, fileName)
-//
-////                val resolver = context?.applicationContext?.contentResolver
-////
-////                if (resolver == null) {
-////                    //todo
-////                    showToast("nie ma contextu...")
-////                    logD("nie ma contextu...")
-////                } else {
-////                    val imageCollection = MediaStore.Images.Media.getContentUri(
-////                        MediaStore.VOLUME_EXTERNAL
-////                    )
-////                }
-//            }
-//
-//            override fun onLoadCleared(placeholder: Drawable?) {
-//            }
-//
-//            override fun onLoadFailed(errorDrawable: Drawable?) {
-//                showSnackbar(getString(R.string.image_saving_error))
-//            }
-//        })
-//    }
-
-//    private fun saveToStorage(image: Bitmap, storageDir: File, fileName: String){
-//        val imageFile = File(storageDir, fileName)
-//        val savedImagePath = imageFile.absolutePath
-//        logD(savedImagePath)
-//        try {
-//            val out = FileOutputStream(imageFile)
-//            image.compress(Bitmap.CompressFormat.JPEG, 100, out)
-//            out.close()
-//            //todo dac tutaj kolejny dialog - Success
-//            showSnackbar(getString(R.string.image_saved))
-//            showProgressBar(false)
-//        } catch (e: Exception){
-//            showProgressBar(false)
-//            showSnackbar(getString(R.string.image_saving_error))
-//            logD(e)
-//        }
-//    }
 
     private fun askForPermissionsAndSavePhoto() {
         requestPermissions(permissions, storageRequestCode)
