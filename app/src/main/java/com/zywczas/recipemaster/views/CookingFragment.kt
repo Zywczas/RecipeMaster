@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -32,8 +33,6 @@ import com.zywczas.recipemaster.utilities.*
 import com.zywczas.recipemaster.viewmodels.CookingViewModel
 import com.zywczas.recipemaster.viewmodels.UniversalViewModelFactory
 import kotlinx.android.synthetic.main.fragment_cooking.*
-import java.io.File
-import java.io.FileOutputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -66,8 +65,14 @@ class CookingFragment @Inject constructor(
     }
 
     private fun verifyStoragePermissions() {
-        if (ContextCompat.checkSelfPermission(requireContext(),permissions[0]) == PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(requireContext(),permissions[1]) == PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                permissions[0]
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                permissions[1]
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
             arePermissionsGranted = true
         }
@@ -100,10 +105,10 @@ class CookingFragment @Inject constructor(
         progressBar_cooking.isVisible = visible
     }
 
-    @SuppressLint("SetTextI18n")
     private fun updateUI(recipe: Recipe) {
         recipe.title?.let {
             toolbar_cooking.title = "$it ${getString(R.string.recipe)}"
+            @SuppressLint("SetTextI18n")
             food_name_textView.text = "$it:"
         }
         food_description_textView.text = recipe.description
@@ -154,7 +159,7 @@ class CookingFragment @Inject constructor(
             showSnackbar(getString(R.string.no_image_to_save))
         } else {
             requestedImageUrl = recipe!!.images!![index]
-            areYouSureDialog()
+            showSaveConfirmationDialog()
         }
     }
 
@@ -166,7 +171,7 @@ class CookingFragment @Inject constructor(
             else -> 666
         }
 
-    private fun areYouSureDialog() {
+    private fun showSaveConfirmationDialog() {
         val builder = AlertDialog.Builder(requireContext()).create()
         val dialogView = layoutInflater.inflate(R.layout.dialog_save_image, null)
         val yes = dialogView.findViewById<TextView>(R.id.yes_textView_dialog)
@@ -194,7 +199,10 @@ class CookingFragment @Inject constructor(
         val fileName = "${timeStamp}_$photoName"
         glide.load(requestedImageUrl)
             .into(object : CustomTarget<Drawable>() {
-                override fun onResourceReady(resource: Drawable,transition: Transition<in Drawable>?) {
+                override fun onResourceReady(
+                    resource: Drawable,
+                    transition: Transition<in Drawable>?
+                ) {
                     val bitmap = resource.toBitmap()
                     saveImageToGallery(bitmap, fileName)
                 }
@@ -210,20 +218,32 @@ class CookingFragment @Inject constructor(
 
     private fun saveImageToGallery(bitmap: Bitmap, fileName: String) {
         var fos: OutputStream? = null
-            context?.contentResolver?.also { resolver ->
-                val contentValues = ContentValues().apply {
-                    put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
-                    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-                        put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
-                        put(MediaStore.MediaColumns.IS_PENDING, 1)
-                    }
+        context?.contentResolver?.also { resolver ->
+            val contentValues = ContentValues().apply {
+                put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+                put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                    put(MediaStore.MediaColumns.IS_PENDING, 1)
                 }
-                val imageUri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-                fos = imageUri?.let { resolver.openOutputStream(it) }
             }
+            val imageUri: Uri? =
+                resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+            fos = imageUri?.let { resolver.openOutputStream(it) }
+        }
         fos?.use { bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it) }
-        showSnackbar(getString(R.string.image_saved))
+        showInfoDialog(getString(R.string.image_saved))
+    }
+
+    private fun showInfoDialog(msg : String){
+        val builder = AlertDialog.Builder(requireContext()).create()
+        val dialogView = layoutInflater.inflate(R.layout.dialog_message, null)
+        val textView = dialogView.findViewById<TextView>(R.id.info_txtView_infoDialog)
+        textView.text = msg
+        val ok = dialogView.findViewById<ImageView>(R.id.confirm_imageView_infoDialog)
+        ok.setOnClickListener { builder.dismiss() }
+        builder.setView(dialogView)
+        builder.show()
     }
 
     private fun askForPermissionsAndSavePhoto() {
