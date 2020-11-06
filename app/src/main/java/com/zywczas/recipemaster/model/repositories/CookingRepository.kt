@@ -28,15 +28,12 @@ class CookingRepository @Inject constructor(
     }
 
     private fun getError(e: Throwable) : Resource<Recipe>{
-        return if (e is HttpException) {
-            logD(e)
-            val httpError = R.string.http_error_recipe
-            Resource.error(httpError, null)
-        } else {
-            logD(e)
-            val generalError= R.string.general_restapi_error
-            Resource.error(generalError, null)
+        val generalError= R.string.general_restapi_error
+        if (e is HttpException) {
+            logD("HttpException: ${e.code()}")
         }
+        logD(e)
+        return Resource.error(generalError, null)
     }
 
 

@@ -2,9 +2,12 @@
     <string name="app_name">RecipeMaster</string>
     <string name="recipe">Recipe!</string>
     <string name="logged_as">Logged as</string>
+    <string name="sure_save_image">Do you want to save this image?</string>
+    <string name="yes">OK</string>
+    <string name="no">Cancel</string>
     <string name="connection_problem">"Problem with internet. Check your connection and try again."</string>
-    <string name="http_error_recipe">"Problem with downloading recipe. Error code: "</string>
-    <string name="general_restapi_error">"Problem with contacting server. Check connection and try again."</string>
+    <string name="general_restapi_error">"Problem with downloading recipe. Check connection and try again."</string>
+    <string name="permission_warning">"Please permit access to proceed."</string>
 
 <!--    Facebook -->
     <string name="facebook_app_id">666053657437502</string>

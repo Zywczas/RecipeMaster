@@ -13,3 +13,5 @@ package com.zywczas.recipemaster.utilities
 //todo usunac appbar z login activity
 
 //todo pousuwac niektore logi
+
+//todo pomyslec nad layoutem poziomym dla Login screen
