@@ -33,26 +33,6 @@ class CookingFragment @Inject constructor(
     private val viewModel : CookingViewModel by viewModels { viewModelFactory }
     private val userName by lazyAndroid { requireArguments().let { CookingFragmentArgs.fromBundle(it).userName } }
     private val appBarConfig by lazyAndroid { AppBarConfiguration(setOf(R.id.destination_login)) }
-    private var arePermissionsGranted = false
-    @Suppress("PrivatePropertyName")
-    private val REQUEST_CODE by lazyAndroid { 777 }
-    private val permissions by lazyAndroid { arrayOf(
-        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE
-    )}
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        verifyStoragePermissions()
-    }
-
-    private fun verifyStoragePermissions() {
-        if (ContextCompat.checkSelfPermission(requireContext(), permissions[0]) == PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(requireContext(), permissions[1]) == PackageManager.PERMISSION_GRANTED
-        ) {
-            arePermissionsGranted = true
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -125,43 +105,8 @@ class CookingFragment @Inject constructor(
         food3_imageView.setOnClickListener(imageClickListener)
     }
 
-    private val imageClickListener = View.OnClickListener { v ->
-        //ask are you sure
-        val napis = v.id.toString()
-        val dialog = SaveImageDialog()
-        val bundle = Bundle()
-        bundle.putString("somekey", napis)
-        dialog.arguments = bundle
-        dialog.show(childFragmentManager, "SaveImage")
-        //check permissions
-//        if (arePermissionsGranted){
-//            //save photo
-//        } else {
-//            askForPermissionsAndSavePhoto()
-//        }
-    }
-
-    private fun askForPermissionsAndSavePhoto() {
-        ActivityCompat.requestPermissions(requireActivity(), permissions, REQUEST_CODE)
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when(requestCode){
-            REQUEST_CODE -> {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    arePermissionsGranted = true
-                    logD("permission granted: ${permissions[0]}")
-                    logD("permission granted: ${permissions[1]}")
-                    //todo save photo
-                } else {
-                    showSnackbar(getString(R.string.permission_warning))
-                }
-            }
-        }
+    private val imageClickListener = View.OnClickListener {
+        SaveImageDialog().show(childFragmentManager, "SaveImage")
     }
 
 }
