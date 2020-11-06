@@ -7,7 +7,7 @@
     <string name="no">Cancel</string>
     <string name="connection_problem">"Problem with internet. Check your connection and try again."</string>
     <string name="general_restapi_error">"Problem with downloading recipe. Check connection and try again."</string>
-    <string name="permission_warning">"Please permit access to proceed."</string>
+    <string name="permission_warning">"Grant access to proceed."</string>
     <string name="no_image_to_save">There is no image to save.</string>
     <string name="image_saving_error">Could not save the image. Try again.</string>
     <string name="image_saved">Image saved!</string>
