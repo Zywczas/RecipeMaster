@@ -105,7 +105,7 @@ class CookingFragment @Inject constructor(
             @SuppressLint("SetTextI18n")
             food_name_textView.text = "$it:"
         }
-        food_description_textView.text = recipe.description
+        food_description_textView.text = recipe.foodDescription
         ingredients_list_textView.text = recipe.ingredientsDescription
         preparing_steps_textView.text = recipe.preparingDescription
         recipe.images?.get(0)?.let {

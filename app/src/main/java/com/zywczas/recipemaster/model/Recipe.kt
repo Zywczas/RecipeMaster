@@ -12,7 +12,7 @@ data class Recipe(
 
     @SerializedName("description")
     @Expose
-    val description: String?,
+    val foodDescription: String?,
 
     @SerializedName("ingredients")
     @Expose
@@ -32,7 +32,6 @@ data class Recipe(
     lateinit var preparingDescription : String
         private set
 
-//todo pomyslec nad rozbiciem
     @Suppress("LiftReturnOrAssignment")
     fun convertIngredientsListToDescription(){
         ingredientsDescription = ""
@@ -51,7 +50,6 @@ data class Recipe(
         }
     }
 
-    //todo pomyslec nad rozbiciem
     @Suppress("LiftReturnOrAssignment")
     fun convertPreparingStepsToDescription(){
         if (preparingSteps != null){
@@ -69,5 +67,7 @@ data class Recipe(
             }
         }
     }
+
+
 }
 
