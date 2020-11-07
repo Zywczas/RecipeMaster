@@ -1,16 +1,16 @@
 package com.zywczas.recipemaster.model
 
-import com.zywczas.recipemaster.util.TestUtil
+import com.zywczas.recipemaster.model.webservice.RecipeFromApi
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 
-internal class RecipeTest {
+internal class RecipeFromApiTest {
 
-    lateinit var recipe: Recipe
+    private lateinit var recipeFromApi: RecipeFromApi
 
     @BeforeEach
     fun setup(){
-        recipe = Recipe(
+        recipeFromApi = RecipeFromApi(
             "Pizza",
             "Pizza jest potrawą kuchni włoskiej, obecnie szeroko rozpowszechnioną...",
             listOf("3 szklanki mąki pszennej", "1 łyżeczka soli", "przyprawy do smaku (oregano, bazylia i słodka papryka)"),
@@ -25,8 +25,8 @@ internal class RecipeTest {
                                 "- 1 łyżeczka soli\n" +
                                 "- przyprawy do smaku (oregano, bazylia i słodka papryka)"
 
-        recipe.convertIngredientsListToDescription()
-        val actual = recipe.ingredientsDescription
+        recipeFromApi.convertIngredientsListToDescription()
+        val actual = recipeFromApi.ingredientsDescription
 
         assertEquals(expected, actual)
     }
@@ -37,8 +37,8 @@ internal class RecipeTest {
                 "2. Drożdże zalawamy ciepłą wodą, olejem i cukrem. Odstawiamy do wyrośnięcia.\n\n" +
                 "3. Gotowy płyn wlewamy do mąki i mieszam najpierw łyżką, potem zagniatamy ręką."
 
-        recipe.convertPreparingStepsToDescription()
-        val actual = recipe.preparingDescription
+        recipeFromApi.convertPreparingStepsToDescription()
+        val actual = recipeFromApi.preparingDescription
 
         assertEquals(expected, actual)
     }

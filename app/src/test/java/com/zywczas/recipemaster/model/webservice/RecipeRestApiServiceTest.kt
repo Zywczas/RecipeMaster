@@ -35,7 +35,8 @@ internal class RecipeRestApiServiceTest {
     }
 
     @Nested
-    inner class GetRecipe {
+    inner class GetRecipeFromApiFromApi {
+
         @Test
         fun success(){
             val response = MockResponse()
@@ -51,7 +52,7 @@ internal class RecipeRestApiServiceTest {
 
         @Test
         fun testGsonConverter(){
-            val expectedRecipe = TestUtil.recipe1
+            val expectedRecipe = TestUtil.recipeFromApi1
             val response = MockResponse()
                 .setResponseCode(HttpURLConnection.HTTP_OK)
                 .setBody(MOCKED_API_RESPONSE_BODY)

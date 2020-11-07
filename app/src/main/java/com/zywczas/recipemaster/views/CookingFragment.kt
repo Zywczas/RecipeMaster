@@ -29,6 +29,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.snackbar.Snackbar
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.model.Recipe
+import com.zywczas.recipemaster.model.webservice.RecipeFromApi
 import com.zywczas.recipemaster.utilities.*
 import com.zywczas.recipemaster.viewmodels.CookingViewModel
 import com.zywczas.recipemaster.viewmodels.UniversalViewModelFactory
@@ -83,7 +84,7 @@ class CookingFragment @Inject constructor(
     }
 
     private fun setupObserver() {
-        viewModel.recipe.observe(viewLifecycleOwner) { resource ->
+        viewModel.recipeFromApiFromApi.observe(viewLifecycleOwner) { resource ->
             showProgressBar(false)
             when (resource.status) {
                 Status.SUCCESS -> {
@@ -100,7 +101,7 @@ class CookingFragment @Inject constructor(
     }
 
     private fun updateUI(recipe: Recipe) {
-        recipe.title?.let {
+        recipe.title.let {
             toolbar_cooking.title = "$it ${getString(R.string.recipe)}"
             @SuppressLint("SetTextI18n")
             food_name_textView.text = "$it:"
@@ -249,10 +250,9 @@ class CookingFragment @Inject constructor(
         when (requestCode) {
             storageRequestCode -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //todo raczej nie potrzebne arePermissionsGranted = true
+                    arePermissionsGranted = true
                     downloadAndSaveImage()
                 } else {
-                    logD("permission odmowione: ${permissions[1]}")
                     showToast(getString(R.string.permission_warning))
                 }
             }

@@ -1,8 +1,9 @@
 package com.zywczas.recipemaster.model.repositories
 
-import android.app.Application
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.model.Recipe
+import com.zywczas.recipemaster.model.toRecipe
+import com.zywczas.recipemaster.model.webservice.RecipeFromApi
 import com.zywczas.recipemaster.model.webservice.RecipeRestApiService
 import com.zywczas.recipemaster.utilities.Resource
 import com.zywczas.recipemaster.utilities.logD
@@ -19,10 +20,8 @@ class CookingRepository @Inject constructor(
         val apiSingle = restApi.getRecipe()
         return apiSingle
             .subscribeOn(Schedulers.io())
-            .map { recipe ->
-                recipe.convertIngredientsListToDescription()
-                recipe.convertPreparingStepsToDescription()
-                Resource.success(recipe) }
+            .map { recipeFromApi ->
+                Resource.success(toRecipe(recipeFromApi)) }
             .onErrorReturn { getError(it) }
             .toFlowable()
     }
