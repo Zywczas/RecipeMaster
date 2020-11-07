@@ -16,7 +16,7 @@ class CookingRepository @Inject constructor(
     private val restApi : RecipeRestApiService
 ) {
 
-    fun getRecipe() : Flowable<Resource<Recipe>> {
+    fun getRecipeFromApi() : Flowable<Resource<Recipe>> {
         val apiSingle = restApi.getRecipe()
         return apiSingle
             .subscribeOn(Schedulers.io())

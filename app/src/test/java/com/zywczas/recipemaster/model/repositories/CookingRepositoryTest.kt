@@ -1,34 +1,60 @@
 package com.zywczas.recipemaster.model.repositories
 
+import androidx.test.core.app.ApplicationProvider
+import com.zywczas.recipemaster.BaseApplication
+import com.zywczas.recipemaster.R
+import com.zywczas.recipemaster.model.Recipe
 import com.zywczas.recipemaster.model.webservice.RecipeFromApi
 import com.zywczas.recipemaster.model.webservice.RecipeRestApiService
 import com.zywczas.recipemaster.util.TestUtil
+import com.zywczas.recipemaster.utilities.Resource
+import io.mockk.every
 import io.mockk.mockk
+import io.reactivex.rxjava3.core.Single
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Nested
+import org.robolectric.annotation.Config
 
 internal class CookingRepositoryTest {
 
     private val apiService = mockk<RecipeRestApiService>()
     private val repo = CookingRepository(apiService)
-    private val recipe = TestUtil.recipeFromApi1
+    private val recipe = TestUtil.recipe1
+    private val recipeFromApi = TestUtil.recipeFromApi1
 
     @Nested
-    inner class GetRecipeFromApiFromApi {
+    inner class GetRecipe {
 
         @Test
         fun returnRecipe() {
-            val expected = RecipeFromApi(
-                "Pizza",
-                "Pizza jest potrawą kuchni włoskiej, obecnie szeroko rozpowszechnioną...",
-                listOf("3 szklanki mąki pszennej", "1 łyżeczka soli", "przyprawy do smaku (oregano, bazylia i słodka papryka)"),
-                listOf("Suche składniki dokładnie mieszamy.", "Drożdże zalawamy ciepłą wodą, olejem i cukrem. Odstawiamy do wyrośnięcia.", "Gotowy płyn wlewamy do mąki i mieszam najpierw łyżką, potem zagniatamy ręką."),
-                listOf("http://mooduplabs.com/test/pizza1.jpg", "http://mooduplabs.com/test/pizza2.jpg", "http://mooduplabs.com/test/pizza3.jpg")
-            )
-            expected.ingredientsDescription
+            val expected = recipe
+            val returnedApiResponse = Single.just(recipeFromApi)
+            every { apiService.getRecipe() } returns returnedApiResponse
 
+            val actual = repo.getRecipeFromApi().blockingFirst()
+
+            assertEquals(Resource.success(expected), actual)
         }
+
+        @Test
+        fun getException_returnError(){
+            val expectedMessage = R.string.general_restapi_error
+            val apiResponse : Single<RecipeFromApi> = Single.error(Exception())
+            every { apiService.getRecipe() } returns apiResponse
+
+            val repoResponse = repo.getRecipeFromApi().blockingFirst()
+            val actualMessage = repoResponse.message?.getContentIfNotHandled()
+            val actualData = repoResponse.data
+
+            assertEquals(expectedMessage, actualMessage)
+            assertEquals(null, actualData)
+        }
+
+
+
     }
 
 

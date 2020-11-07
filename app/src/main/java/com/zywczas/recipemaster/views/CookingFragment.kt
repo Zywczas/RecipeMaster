@@ -29,7 +29,6 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.snackbar.Snackbar
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.model.Recipe
-import com.zywczas.recipemaster.model.webservice.RecipeFromApi
 import com.zywczas.recipemaster.utilities.*
 import com.zywczas.recipemaster.viewmodels.CookingViewModel
 import com.zywczas.recipemaster.viewmodels.UniversalViewModelFactory
@@ -84,7 +83,7 @@ class CookingFragment @Inject constructor(
     }
 
     private fun setupObserver() {
-        viewModel.recipeFromApiFromApi.observe(viewLifecycleOwner) { resource ->
+        viewModel.recipe.observe(viewLifecycleOwner) { resource ->
             showProgressBar(false)
             when (resource.status) {
                 Status.SUCCESS -> {
