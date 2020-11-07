@@ -2,6 +2,7 @@ package com.zywczas.recipemaster.model.webservice
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.zywczas.recipemaster.util.MOCKED_API_RESPONSE_BODY
+import com.zywczas.recipemaster.util.TestUtil
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -12,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.net.HttpURLConnection
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class ApiServiceTest {
+internal class RecipeRestApiServiceTest {
 
     private val mockWebServer = MockWebServer()
     private lateinit var apiService : RecipeRestApiService
@@ -44,8 +45,26 @@ internal class ApiServiceTest {
 
             val recipe = apiService.getRecipe().blockingGet()
             val actualFood = recipe.title
+
             assertEquals("Pizza", actualFood)
         }
+
+        @Test
+        fun testGsonConverter(){
+            val expectedRecipe = TestUtil.recipe1
+            val response = MockResponse()
+                .setResponseCode(HttpURLConnection.HTTP_OK)
+                .setBody(MOCKED_API_RESPONSE_BODY)
+            mockWebServer.enqueue(response)
+
+            val actualRecipe = apiService.getRecipe().blockingGet()
+
+            assertEquals(expectedRecipe, actualRecipe)
+        }
+
+
     }
+
+
 
 }
