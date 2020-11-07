@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'de.mannodermaus.android-junit5'
 
 android {
     compileSdkVersion 29
@@ -25,6 +26,11 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    //JUnit5 will bundle in files with identical paths; exclude them
+    packagingOptions {
+        exclude "META-INF/LICENSE*"
     }
 
     buildTypes {
@@ -86,8 +92,41 @@ dependencies {
     //facebook login
     implementation 'com.facebook.android:facebook-login:8.1.0'
 
-    testImplementation 'junit:junit:4.13'
+    // Testing Navigation
+    androidTestImplementation 'androidx.navigation:navigation-testing:2.3.0'
+
+    // Testing Fragments in Isolation
+    debugImplementation "androidx.fragment:fragment-testing:1.2.5"
+
+    //androidx.test
+    androidTestImplementation "androidx.test:runner:1.3.0"
+    androidTestImplementation "androidx.test:core:1.3.0"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation "androidx.test.ext:truth:1.3.0"
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    // INSTRUMENTATION TESTS (use JUnit4) - JUnit5 requires java 8 (Api 26)
+    androidTestImplementation 'junit:junit:4.13'
+
+    //JUnit5 (Required) Writing and executing Unit Tests on the JUnit Platform
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.0"
+    testImplementation "org.junit.platform:junit-platform-runner:1.7.0"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.0"
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.0") {
+        because("allows JUnit 3 and JUnit 4 tests to run")
+    }
+
+    //espresso
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.3.0'
+
+    //Mockk - instrumentation tests
+    androidTestImplementation 'io.mockk:mockk-android:1.10.2'
+    //Mockk - unit tests
+    testImplementation 'io.mockk:mockk:1.10.2'
+
+    //mocking web server - testing Retrofit - instrumentation tests
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.0")
 
 }

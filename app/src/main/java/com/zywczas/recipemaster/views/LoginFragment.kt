@@ -31,7 +31,7 @@ class LoginFragment @Inject constructor(
         setupUi()
         setupOnClickListeners()
     }
-//todo przetestowac po czyszczeniu
+
     private fun checkIfLoggedInAndGetProfile(){
         val accessToken = AccessToken.getCurrentAccessToken()
         isLoggedIn = accessToken != null && accessToken.isExpired.not()
