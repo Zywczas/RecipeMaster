@@ -9,7 +9,7 @@ internal class RecipeFromApiTest {
     private lateinit var recipeFromApi: RecipeFromApi
 
     @BeforeEach
-    fun setup(){
+    private fun setup(){
         recipeFromApi = RecipeFromApi(
             "Pizza",
             "Pizza jest potrawą kuchni włoskiej, obecnie szeroko rozpowszechnioną...",
