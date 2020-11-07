@@ -1,6 +1,7 @@
 package com.zywczas.recipemaster.viewmodels
 
 import android.app.Application
+import android.provider.MediaStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MediatorLiveData
@@ -58,7 +59,7 @@ class CookingViewModel @Inject constructor(
 //                }
 //            })
 //    }
-
+//
 //    private fun saveImageToGallery(bitmap: Bitmap, fileName: String) {
 //        var fos: OutputStream? = null
 //            val contentValues = ContentValues().apply {

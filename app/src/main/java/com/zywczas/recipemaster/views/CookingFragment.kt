@@ -189,13 +189,13 @@ class CookingFragment @Inject constructor(
 
     private fun downloadAndSaveImage() {
         val timeStamp = SimpleDateFormat("yyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val photoName = requestedImageUrl!!.substring(requestedImageUrl!!.lastIndexOf("/") + 1)
-        val fileName = "${timeStamp}_$photoName"
+        val urlLastPart = requestedImageUrl!!.substring(requestedImageUrl!!.lastIndexOf("/") + 1)
+        val imageName = "${timeStamp}_$urlLastPart"
         glide.load(requestedImageUrl)
             .into(object : CustomTarget<Drawable>() {
                 override fun onResourceReady(resource: Drawable,transition: Transition<in Drawable>?) {
                     val bitmap = resource.toBitmap()
-                    saveImageToGallery(bitmap, fileName)
+                    saveImageToGallery(bitmap, imageName)
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {
@@ -207,23 +207,28 @@ class CookingFragment @Inject constructor(
             })
     }
 
-    private fun saveImageToGallery(bitmap: Bitmap, fileName: String) {
+    private fun saveImageToGallery(bitmap: Bitmap, imageName: String) {
         var fos: OutputStream? = null
         context?.contentResolver?.also { resolver ->
-            val contentValues = ContentValues().apply {
-                put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
-                put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) { //todo przetestowac na nowym telefonie
-                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
-                    put(MediaStore.MediaColumns.IS_PENDING, 1)
-                }
-            }
+            val contentValues = setContentValues(imageName)
             val imageUri: Uri? =
                 resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
             fos = imageUri?.let { resolver.openOutputStream(it) }
         }
         fos?.use { bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it) }
         showInfoDialog(getString(R.string.image_saved))
+    }
+
+    private fun setContentValues(imageName: String) : ContentValues {
+        return ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, imageName)
+            put(MediaStore.MediaColumns.TITLE, "Recipe Master")
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) { //todo przetestowac na nowym telefonie
+                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                put(MediaStore.MediaColumns.IS_PENDING, 1)
+            }
+        }
     }
 
     private fun showInfoDialog(msg : String){
