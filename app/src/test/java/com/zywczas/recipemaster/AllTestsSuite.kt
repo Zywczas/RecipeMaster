@@ -6,7 +6,8 @@ import org.junit.runner.RunWith
 
 @RunWith(JUnitPlatform::class)
 @SelectPackages(
-    "com.zywczas.recipemaster.model"
+    "com.zywczas.recipemaster.model",
+    "com.zywczas.recipemaster.utilities"
 )
 class AllTestsSuite
 

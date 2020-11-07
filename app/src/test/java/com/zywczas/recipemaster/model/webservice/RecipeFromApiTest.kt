@@ -1,4 +1,4 @@
-package com.zywczas.recipemaster.model
+package com.zywczas.recipemaster.model.webservice
 
 import com.zywczas.recipemaster.model.webservice.RecipeFromApi
 import org.junit.jupiter.api.*

@@ -1,9 +1,6 @@
 package com.zywczas.recipemaster.model.repositories
 
-import androidx.test.core.app.ApplicationProvider
-import com.zywczas.recipemaster.BaseApplication
 import com.zywczas.recipemaster.R
-import com.zywczas.recipemaster.model.Recipe
 import com.zywczas.recipemaster.model.webservice.RecipeFromApi
 import com.zywczas.recipemaster.model.webservice.RecipeRestApiService
 import com.zywczas.recipemaster.util.TestUtil
@@ -11,12 +8,9 @@ import com.zywczas.recipemaster.utilities.Resource
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.rxjava3.core.Single
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
-
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
-import org.robolectric.annotation.Config
+import org.junit.jupiter.api.Test
 
 internal class CookingRepositoryTest {
 
@@ -40,9 +34,9 @@ internal class CookingRepositoryTest {
         }
 
         @Test
-        fun getException_returnError(){
+        fun getException_returnError() {
             val expectedMessage = R.string.general_restapi_error
-            val apiResponse : Single<RecipeFromApi> = Single.error(Exception())
+            val apiResponse: Single<RecipeFromApi> = Single.error(Exception())
             every { apiService.getRecipe() } returns apiResponse
 
             val repoResponse = repo.getRecipeFromApi().blockingFirst()
@@ -54,11 +48,7 @@ internal class CookingRepositoryTest {
         }
 
 
-
     }
-
-
-
 
 
 }
