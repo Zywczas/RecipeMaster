@@ -1,6 +1,5 @@
 package com.zywczas.recipemaster.model.webservice
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.zywczas.recipemaster.util.MOCKED_API_RESPONSE_BODY
 import com.zywczas.recipemaster.util.TestUtil
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
@@ -8,6 +7,7 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
+import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.HttpURLConnection
@@ -60,6 +60,16 @@ internal class RecipeRestApiServiceTest {
             val actualRecipe = apiService.getRecipe().blockingGet()
 
             assertEquals(expectedRecipe, actualRecipe)
+        }
+
+        @Test
+        fun getHttpError_throwException(){
+            val response = MockResponse()
+                .setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
+                .setBody(MOCKED_API_RESPONSE_BODY)
+            mockWebServer.enqueue(response)
+
+            assertThrows<HttpException> { apiService.getRecipe().blockingGet() }
         }
 
 
