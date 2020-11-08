@@ -26,6 +26,7 @@ class LoginFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        logD("zalogowany na start: $isLoggedIn") //todo do usuniecia
         checkIfLoggedInAndGetProfile()
         setupLoginManagerCallback()
         setupUi()
@@ -33,8 +34,20 @@ class LoginFragment @Inject constructor(
     }
 
     private fun checkIfLoggedInAndGetProfile(){
+        checkIfLoggedIn { complete ->
+            if (complete && isLoggedIn) {
+                getFacebookProfile()
+            }
+        }
+    }
+
+    private fun checkIfLoggedIn(complete : (Boolean) -> Unit){
         val accessToken = AccessToken.getCurrentAccessToken()
         isLoggedIn = accessToken != null && accessToken.isExpired.not()
+        complete(true)
+    }
+
+    private fun getFacebookProfile(){
         val profile = Profile.getCurrentProfile()
         userName = profile?.name
     }
@@ -42,21 +55,23 @@ class LoginFragment @Inject constructor(
     private fun setupLoginManagerCallback(){
         faceLoginManager.registerCallback(faceCallbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult?) {
-                    val accessToken = result?.accessToken
                     isLoggedIn = true
+                    showToast(getString(R.string.login_success))
+                    getFacebookProfile()
                 }
 
                 override fun onCancel() {
                     isLoggedIn = false
-                    showToast("In order to proceed you need to be logged in") //todo wrzucic w stringi
+                    showToast(getString(R.string.log_in_to_proceed))
                 }
 
                 override fun onError(error: FacebookException?) {
+                    //todo tu sie pokazuje server error na telefonie taty - chyba naprawione,
+                    //todo w loginWithFacebookIfConnected() bylo drugie instance LoginManagera, a nie ten z daggera
                     isLoggedIn = false
                     error?.let { logD(it) }
-                    showToast("Problem with login to Facebook.")
+                    showToast(getString(R.string.login_problem_facebook))
                 }
-
             })
     }
 
@@ -70,10 +85,14 @@ class LoginFragment @Inject constructor(
     }
 
     private fun setupOnClickListeners(){
+        setupSpeedDialClick()
+    }
+
+    private fun setupSpeedDialClick(){
         speed_dial_login.setOnActionSelectedListener { item ->
             when(item.id){
                 R.id.get_recipe_item -> {
-                    goToCookingFragmentAfterVerification()
+                    goToCookingFragmentIfConnected()
                     true
                 }
                 R.id.facebook_item -> {
@@ -85,35 +104,34 @@ class LoginFragment @Inject constructor(
         }
     }
 
-    private fun goToCookingFragmentAfterVerification(){
+    private fun goToCookingFragmentIfConnected(){
         if (network.isConnected.not()) {
-            showToast(getString(R.string.need_for_network))
+            showToast(getString(R.string.connect_to_proceed))
         } else {
-            if (isLoggedIn.not()){
-                showToast(getString(R.string.need_for_login))
-            } else {
-                goToCookingFragment()
-            }
+            goToCookingFragment()
         }
     }
 
     private fun goToCookingFragment(){
-        val name = userName ?: ""
+        val name = userName ?: getString(R.string.not_logged_in)
         val directions = LoginFragmentDirections.actionToCooking(name)
         findNavController().navigate(directions)
     }
 
     private fun loginWithFacebookIfConnected(){
         if (isLoggedIn){
-            showToast(getString(R.string.you_are_logged_in))
+            showToast(getString(R.string.logged_in_already))
         } else {
             if (network.isConnected.not()) {
                 showToast(getString(R.string.connection_problem))
             } else {
-                LoginManager.getInstance().logInWithReadPermissions(this, mutableListOf("email", "public_profile"))
-                checkIfLoggedInAndGetProfile()
+                loginWithFacebook()
             }
         }
+    }
+
+    private fun loginWithFacebook(){
+        faceLoginManager.logInWithReadPermissions(this, mutableListOf("email", "public_profile"))
     }
 
 }

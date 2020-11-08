@@ -210,7 +210,7 @@ class CookingFragment @Inject constructor(
     private fun saveImageToGallery(bitmap: Bitmap, imageName: String) {
         var fos: OutputStream? = null
         context?.contentResolver?.also { resolver ->
-            val contentValues = setContentValues(imageName)
+            val contentValues = getContentValues(imageName)
             val imageUri: Uri? =
                 resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
             fos = imageUri?.let { resolver.openOutputStream(it) }
@@ -219,7 +219,7 @@ class CookingFragment @Inject constructor(
         showInfoDialog(getString(R.string.image_saved))
     }
 
-    private fun setContentValues(imageName: String) : ContentValues {
+    private fun getContentValues(imageName: String) : ContentValues {
         return ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, imageName)
             put(MediaStore.MediaColumns.TITLE, "Recipe Master")
