@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.leinardi.android.speeddial.SpeedDialView
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.SessionManager
 import com.zywczas.recipemaster.utilities.logD
@@ -73,10 +74,28 @@ class LoginFragment @Inject constructor(
     }
 
     private fun setupOnClickListeners(){
-        setupSpeedDialClick()
+        setupSpeedDialMainBtnClick()
+        setupSpeedDialMenuClick()
     }
 
-    private fun setupSpeedDialClick(){
+    private fun setupSpeedDialMainBtnClick(){
+        speedDial_login.setOnChangeListener(object : SpeedDialView.OnChangeListener{
+            override fun onMainActionSelected(): Boolean {
+                return false
+            }
+
+            override fun onToggleChanged(isOpen: Boolean) {
+                if (isOpen){
+                    //todo
+                } else {
+
+                }
+            }
+
+        })
+    }
+
+    private fun setupSpeedDialMenuClick(){
         speedDial_login.setOnActionSelectedListener { item ->
             when(item.id){
                 R.id.get_recipe_menuItem -> {

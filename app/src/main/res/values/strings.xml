@@ -9,7 +9,9 @@
 
 <!--    UI values-->
     <string name="get_recipe">Get the recipe</string>
-    <string name="login_with_facebook">Login with Facebook</string>
+
+    <!--t    UI values PL  -->
+    <string name="login_with_facebook">Zaloguj przez Facebooka</string>
 
 <!--    saving images-->
     <string name="sure_save_image">Do you want to save this image?</string>

@@ -48,10 +48,6 @@
             app:layout_constraintStart_toStartOf="@+id/food_imageView_login"
             app:layout_constraintTop_toTopOf="@+id/food_imageView_login" />
 
-        <!--    todo poprawic pozniej color background wszystkich guzikow i powiekszyc ikonki - pewnie paddding-->
-        <!--    todo nie pokazuje calego tekstu zaloguj przez fejsa-->
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.leinardi.android.speeddial.SpeedDialView
@@ -60,10 +56,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:theme="@style/MyAppTheme"
-        app:maxImageSize="56dp"
+        android:scaleType="center"
+        app:fabSize="normal"
         app:sdMainFabAnimationRotateAngle="360"
-        app:sdMainFabOpenedSrc="@drawable/ic_x_loginscreen"
-        app:sdMainFabClosedSrc="@drawable/ic_add_speeddial"
-        app:sdUseReverseAnimationOnClose="true" />
+        app:sdMainFabOpenedSrc="@drawable/ic_add_35_white"
+        app:sdMainFabClosedSrc="@drawable/ic_add_35_white"
+        app:sdUseReverseAnimationOnClose="true"
+        />
 
 </FrameLayout>
