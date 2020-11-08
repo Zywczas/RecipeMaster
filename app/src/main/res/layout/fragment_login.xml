@@ -28,7 +28,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <view
-            android:id="@+id/view"
+            android:id="@+id/food_imageView_login"
             class="de.hdodenhof.circleimageview.CircleImageView"
             android:layout_width="250dp"
             android:layout_height="250dp"
@@ -43,20 +43,21 @@
             app:layout_constraintVertical_bias="0.4" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/appName_textView_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="RecipeMaster"
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toTopOf="@+id/view" />
+            app:layout_constraintBottom_toBottomOf="@+id/food_imageView_login"
+            app:layout_constraintEnd_toEndOf="@+id/food_imageView_login"
+            app:layout_constraintStart_toStartOf="@+id/food_imageView_login"
+            app:layout_constraintTop_toTopOf="@+id/food_imageView_login" />
 
         <!--    todo poprawic pozniej color background wszystkich guzikow i powiekszyc ikonki - pewnie paddding-->
         <!--    todo nie pokazuje calego tekstu zaloguj przez fejsa-->
+<!--        todo moze poprawic layout w poziomie a moze zablokowac-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
