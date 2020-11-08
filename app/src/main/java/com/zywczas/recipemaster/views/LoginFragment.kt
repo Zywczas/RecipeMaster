@@ -8,20 +8,19 @@ import androidx.navigation.fragment.findNavController
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.zywczas.recipemaster.utilities.NetworkCheck
 import com.zywczas.recipemaster.R
+import com.zywczas.recipemaster.SessionManager
 import com.zywczas.recipemaster.utilities.logD
 import com.zywczas.recipemaster.utilities.showToast
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
 class LoginFragment @Inject constructor(
-    private val network: NetworkCheck,
+    private val session: SessionManager,
     private val faceLoginManager: LoginManager,
-    private val faceCallbackManager : CallbackManager
+    private val faceCallbackManager : CallbackManager,
 ) : Fragment(R.layout.fragment_login) {
 
-    private var isLoggedIn = false
     private var userName: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,17 +32,9 @@ class LoginFragment @Inject constructor(
     }
 
     private fun checkIfLoggedInAndGetProfile(){
-        checkIfLoggedIn { complete ->
-            if (complete && isLoggedIn) {
-                getFacebookProfile()
-            }
+        if (session.isLoggedIn) {
+            getFacebookProfile()
         }
-    }
-
-    private fun checkIfLoggedIn(complete : (Boolean) -> Unit){
-        val token = AccessToken.getCurrentAccessToken()
-        isLoggedIn = token != null && token.isExpired.not()
-        complete(true)
     }
 
     private fun getFacebookProfile(){
@@ -55,20 +46,20 @@ class LoginFragment @Inject constructor(
     private fun setupLoginManagerCallback(){
         faceLoginManager.registerCallback(faceCallbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult?) {
-                    isLoggedIn = true
+                    session.isLoggedIn = true
                     showToast(getString(R.string.login_success))
                     getFacebookProfile()
                 }
 
                 override fun onCancel() {
-                    isLoggedIn = false
+                    session.isLoggedIn = false
                     showToast(getString(R.string.log_in_to_proceed))
                 }
 
                 override fun onError(error: FacebookException?) {
                     //todo tu sie pokazuje server error na telefonie taty - chyba naprawione,
                     //todo w loginWithFacebookIfConnected() bylo drugie instance LoginManagera, a nie ten z daggera
-                    isLoggedIn = false
+                    session.isLoggedIn = false
                     error?.let { logD(it) }
                     showToast(getString(R.string.login_problem_facebook))
                 }
@@ -105,7 +96,7 @@ class LoginFragment @Inject constructor(
     }
 
     private fun goToCookingFragmentIfConnected(){
-        if (network.isConnected.not()) {
+        if (session.isConnected.not()) {
             showToast(getString(R.string.connect_to_proceed))
         } else {
             goToCookingFragment()
@@ -119,10 +110,10 @@ class LoginFragment @Inject constructor(
     }
 
     private fun loginWithFacebookIfConnected(){
-        if (isLoggedIn){
+        if (session.isLoggedIn){
             showToast(getString(R.string.logged_in_already))
         } else {
-            if (network.isConnected.not()) {
+            if (session.isConnected.not()) {
                 showToast(getString(R.string.connection_problem))
             } else {
                 loginWithFacebook()

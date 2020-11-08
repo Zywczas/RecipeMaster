@@ -1,17 +1,28 @@
-package com.zywczas.recipemaster.utilities
+package com.zywczas.recipemaster
 
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
+import com.facebook.AccessToken
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@Suppress("RedundantSetter")
 @Singleton
-class NetworkCheck @Inject constructor(private val app: Application) {
+class SessionManager @Inject constructor(
+    private val app: Application
+) {
 
     var isConnected = false
         private set
+    var isLoggedIn: Boolean = false
+        set(value) { field = value}
+        get() = if (field) {field} else {
+            val token = AccessToken.getCurrentAccessToken()
+            field = token != null && token.isExpired.not()
+            field
+        }
 
     init {
         registerNetworkCallback()
