@@ -40,7 +40,6 @@ class LoginFragment @Inject constructor(
     private fun getFacebookProfile(){
         val profile = Profile.getCurrentProfile()
         userName = profile?.name
-        logD("user: $userName")
     }
 
     private fun setupLoginManagerCallback(){
