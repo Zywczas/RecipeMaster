@@ -56,8 +56,6 @@ class LoginFragment @Inject constructor(
                 }
 
                 override fun onError(error: FacebookException?) {
-                    //todo tu sie pokazuje server error na telefonie taty - chyba naprawione,
-                    //todo w loginWithFacebookIfConnected() bylo drugie instance LoginManagera, a nie ten z daggera
                     session.isLoggedIn = false
                     error?.let { logD(it) }
                     showToast(getString(R.string.login_problem_facebook))

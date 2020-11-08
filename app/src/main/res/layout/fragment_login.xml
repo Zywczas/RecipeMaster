@@ -60,9 +60,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:theme="@style/MyAppTheme"
+        app:maxImageSize="56dp"
         app:sdMainFabAnimationRotateAngle="360"
-        app:sdMainFabClosedSrc="@mipmap/ic_add_loginscreen"
-        app:sdMainFabOpenedSrc="@mipmap/ic_x_loginscreen"
+        app:sdMainFabOpenedSrc="@drawable/ic_x_loginscreen"
+        app:sdMainFabClosedSrc="@drawable/ic_add_speeddial"
         app:sdUseReverseAnimationOnClose="true" />
 
 </FrameLayout>
