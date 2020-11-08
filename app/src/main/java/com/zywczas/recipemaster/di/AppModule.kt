@@ -53,9 +53,4 @@ object AppModule {
     @Singleton
     fun provideFacebookCallbackManager() : CallbackManager = CallbackManager.Factory.create()
 
-    @Provides
-    @Singleton
-    fun provideFacebookAccessToken() : AccessToken? = AccessToken.getCurrentAccessToken()
-
-
 }

@@ -50,17 +50,14 @@ internal class LoginFragmentTest {
     private lateinit var faceLoginManager: LoginManager
     @RelaxedMockK
     private lateinit var faceCallbackManager : CallbackManager
-    @RelaxedMockK
-    private lateinit var faceToken : AccessToken
     private val fragmentFactory : UniversalFragmentFactory = mockk()
 
     @Before
     fun setup(){
         MockKAnnotations.init(this)
         every { network.isConnected } returns true
-        every { faceToken.isExpired } returns true
         every { fragmentFactory.instantiate(any(), any()) } returns
-                LoginFragment(network, faceLoginManager, faceCallbackManager, faceToken)
+                LoginFragment(network, faceLoginManager, faceCallbackManager)
     }
 
     @After
@@ -82,6 +79,7 @@ internal class LoginFragmentTest {
     @Test
     fun isSpeedDialWorking(){
         val getRecipe = app.getString(R.string.get_recipe)
+        val faceLogin = app.getString(R.string.login_with_facebook)
 
         @Suppress("UNUSED_VARIABLE")
         val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
@@ -90,7 +88,7 @@ internal class LoginFragmentTest {
         onView(withId(R.id.get_recipe_menuItem)).check(matches(isDisplayed()))
         onView(withId(R.id.facebook_menuItem)).check(matches(isDisplayed()))
         onView(withText(getRecipe)).check(matches(isDisplayed()))
-        //todo dac test na napis facebooka
+        onView(withText(faceLogin)).check(matches(isDisplayed()))
     }
 
 
