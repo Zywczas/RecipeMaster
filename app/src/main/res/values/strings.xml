@@ -7,6 +7,10 @@
     <string name="general_restapi_error">"Problem with downloading recipe. Check connection and try again."</string>
     <string name="permission_warning">"Grant access to proceed."</string>
 
+<!--    UI values-->
+    <string name="get_recipe">Get the recipe</string>
+    <string name="login_with_facebook">Login with Facebook</string>
+
 <!--    saving images-->
     <string name="sure_save_image">Do you want to save this image?</string>
     <string name="no_image_to_save">There is no image to save.</string>

@@ -95,11 +95,11 @@ class LoginFragment @Inject constructor(
     private fun setupSpeedDialClick(){
         speed_dial_login.setOnActionSelectedListener { item ->
             when(item.id){
-                R.id.get_recipe_item -> {
+                R.id.get_recipe_menuItem -> {
                     goToCookingFragmentIfConnected()
                     true
                 }
-                R.id.facebook_item -> {
+                R.id.facebook_menuItem -> {
                     loginWithFacebookIfConnected()
                     true
                 }

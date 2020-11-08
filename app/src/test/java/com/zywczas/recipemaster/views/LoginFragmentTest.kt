@@ -1,7 +1,9 @@
 package com.zywczas.recipemaster.views
 
+import android.content.Context
 import org.junit.Assert.*
 import android.os.Looper.getMainLooper
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
@@ -18,6 +20,7 @@ import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.login.Login
 import com.facebook.login.LoginManager
+import com.zywczas.recipemaster.BaseApplication
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.utilities.NetworkCheck
 import io.mockk.*
@@ -29,14 +32,19 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
+import org.junit.runners.Parameterized
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.robolectric.pluginapi.Sdk
 import org.robolectric.shadows.ShadowToast
 
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 internal class LoginFragmentTest {
 
+    private val app = ApplicationProvider.getApplicationContext<BaseApplication>()
     private val network: NetworkCheck = mockk()
     @RelaxedMockK
     private lateinit var faceLoginManager: LoginManager
@@ -62,7 +70,6 @@ internal class LoginFragmentTest {
 
     @Test
     fun isFragmentInView(){
-
         @Suppress("UNUSED_VARIABLE")
         val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
 
@@ -70,6 +77,20 @@ internal class LoginFragmentTest {
         onView(withId(R.id.food_imageView_login)).check(matches(isDisplayed()))
         onView(withId(R.id.appName_textView_login)).check(matches(isDisplayed()))
         onView(withId(R.id.speed_dial_login)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun isSpeedDialWorking(){
+        val getRecipe = app.getString(R.string.get_recipe)
+
+        @Suppress("UNUSED_VARIABLE")
+        val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
+        onView(withId(R.id.speed_dial_login)).perform(click())
+
+        onView(withId(R.id.get_recipe_menuItem)).check(matches(isDisplayed()))
+        onView(withId(R.id.facebook_menuItem)).check(matches(isDisplayed()))
+        onView(withText(getRecipe)).check(matches(isDisplayed()))
+        //todo dac test na napis facebooka
     }
 
 
