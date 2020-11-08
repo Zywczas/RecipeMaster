@@ -12,9 +12,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
+            android:layout_height="56dp"
+            android:background="@color/colorPrimary"
             android:theme="@style/ToolbarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +50,6 @@
 
         <!--    todo poprawic pozniej color background wszystkich guzikow i powiekszyc ikonki - pewnie paddding-->
         <!--    todo nie pokazuje calego tekstu zaloguj przez fejsa-->
-<!--        todo moze poprawic layout w poziomie a moze zablokowac-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
