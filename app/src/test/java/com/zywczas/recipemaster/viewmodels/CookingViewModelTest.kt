@@ -17,7 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.api.Assertions.assertEquals
 
 @ExtendWith(InstantExecutorExtension::class)
-internal class CookingViewModelTest {
+class CookingViewModelTest {
 
     private lateinit var viewModel : CookingViewModel
     private val repo = mockk<CookingRepository>()

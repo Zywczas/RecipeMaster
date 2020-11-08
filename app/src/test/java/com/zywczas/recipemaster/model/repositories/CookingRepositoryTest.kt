@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
-internal class CookingRepositoryTest {
+class CookingRepositoryTest {
 
     private val apiService = mockk<RecipeRestApiService>()
     private val repo = CookingRepository(apiService)

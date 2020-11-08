@@ -10,7 +10,6 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.login.LoginManager
 import com.zywczas.recipemaster.BaseApplication
@@ -20,7 +19,6 @@ import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
 import org.hamcrest.Matchers.not
 import org.junit.After
-import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -29,7 +27,7 @@ import org.robolectric.annotation.LooperMode
 
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.PAUSED)
-internal class LoginFragmentTest {
+class LoginFragmentTest {
 
     private val session: SessionManager = mockk()
     @RelaxedMockK
@@ -63,7 +61,7 @@ internal class LoginFragmentTest {
         onView(withId(R.id.toolbar_login)).check(matches(isDisplayed()))
         onView(withId(R.id.food_imageView_login)).check(matches(isDisplayed()))
         onView(withId(R.id.appName_textView_login)).check(matches(isDisplayed()))
-        onView(withId(R.id.speed_dial_login)).check(matches(isDisplayed()))
+        onView(withId(R.id.speedDial_login)).check(matches(isDisplayed()))
         onView(withText(getRecipe)).check(matches(not(isDisplayed())))
         onView(withText(faceLogin)).check(matches(not(isDisplayed())))
     }
@@ -83,7 +81,7 @@ internal class LoginFragmentTest {
     fun isSpeedDialWorking(){
         @Suppress("UNUSED_VARIABLE")
         val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
-        onView(withId(R.id.speed_dial_login)).perform(click())
+        onView(withId(R.id.speedDial_login)).perform(click())
 
         onView(withId(R.id.get_recipe_menuItem)).check(matches(isDisplayed()))
         onView(withId(R.id.facebook_menuItem)).check(matches(isDisplayed()))
@@ -94,13 +92,13 @@ internal class LoginFragmentTest {
     @Test
     fun fragmentDestroyed_isInstanceStateSavedAndRestored(){
         val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
-        onView(withId(R.id.speed_dial_login)).perform(click())
+        onView(withId(R.id.speedDial_login)).perform(click())
         scenario.recreate()
 
         onView(withId(R.id.toolbar_login)).check(matches(isDisplayed()))
         onView(withId(R.id.food_imageView_login)).check(matches(isDisplayed()))
         onView(withId(R.id.appName_textView_login)).check(matches(isDisplayed()))
-        onView(withId(R.id.speed_dial_login)).check(matches(isDisplayed()))
+        onView(withId(R.id.speedDial_login)).check(matches(isDisplayed()))
         onView(withText(getRecipe)).check(matches(isDisplayed()))
         onView(withText(faceLogin)).check(matches(isDisplayed()))
     }
@@ -111,7 +109,7 @@ internal class LoginFragmentTest {
 
         @Suppress("UNUSED_VARIABLE")
         val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
-        onView(withId(R.id.speed_dial_login)).perform(click())
+        onView(withId(R.id.speedDial_login)).perform(click())
         onView(withId(R.id.facebook_menuItem)).perform(click())
 
         verify(exactly = 1) { faceLoginManager.logInWithReadPermissions(any<Fragment>(), any()) }
@@ -119,14 +117,14 @@ internal class LoginFragmentTest {
 
     @Test
     fun navigationToCookingFragment(){
-        val expectedArgument = LoginFragmentDirections.actionToCooking("James Błąd").arguments["userName"] as String
+        val expectedArgument = LoginFragmentDirections.actionToCooking("James Blad").arguments["userName"] as String
         val navController = TestNavHostController(app)
         navController.setGraph(R.navigation.main_nav_graph)
         navController.setCurrentDestination(R.id.destination_login)
 
         val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
         scenario.onFragment { Navigation.setViewNavController(it.requireView(), navController) }
-        onView(withId(R.id.speed_dial_login)).perform(click())
+        onView(withId(R.id.speedDial_login)).perform(click())
         onView(withId(R.id.get_recipe_menuItem)).perform(click())
         val actualArgument = navController.backStack.last().arguments?.get("userName")
 

@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.net.HttpURLConnection
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-internal class RecipeRestApiServiceTest {
+class RecipeRestApiServiceTest {
 
     private val mockWebServer = MockWebServer()
     private lateinit var apiService : RecipeRestApiService

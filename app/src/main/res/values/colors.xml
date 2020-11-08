@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimaryDark">#750404</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="darkGrey">#a6a6a6 </color>
     <color name="blue2">#0033cc</color>
     <color name="red3">#e50909</color>
-<!--todo poustawiac kolory wszedzie-->
+    <color name="red4">#4A0303</color>
 </resources>

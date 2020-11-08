@@ -4,7 +4,7 @@ import com.zywczas.recipemaster.model.webservice.RecipeFromApi
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 
-internal class RecipeFromApiTest {
+class RecipeFromApiTest {
 
     private lateinit var recipeFromApi: RecipeFromApi
 

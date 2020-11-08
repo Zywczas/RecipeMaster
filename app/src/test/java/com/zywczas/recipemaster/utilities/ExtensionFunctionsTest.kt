@@ -3,7 +3,7 @@ package com.zywczas.recipemaster.utilities
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-internal class ExtentionFunctionsTest{
+class ExtensionFunctionsTest{
 
     @Test
     fun lazyAndroid() {

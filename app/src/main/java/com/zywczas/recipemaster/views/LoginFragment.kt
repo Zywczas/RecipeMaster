@@ -71,7 +71,7 @@ class LoginFragment @Inject constructor(
     }
 
     private fun setupUi(){
-        speed_dial_login.inflate(R.menu.menu_speed_dial)
+        speedDial_login.inflate(R.menu.menu_speed_dial)
     }
 
     private fun setupOnClickListeners(){
@@ -79,7 +79,7 @@ class LoginFragment @Inject constructor(
     }
 
     private fun setupSpeedDialClick(){
-        speed_dial_login.setOnActionSelectedListener { item ->
+        speedDial_login.setOnActionSelectedListener { item ->
             when(item.id){
                 R.id.get_recipe_menuItem -> {
                     goToCookingFragmentIfConnected()

@@ -103,22 +103,22 @@ class CookingFragment @Inject constructor(
         recipe.title.let {
             toolbar_cooking.title = "$it ${getString(R.string.recipe)}"
             @SuppressLint("SetTextI18n")
-            food_name_textView.text = "$it:"
+            foodName_textView_cooking.text = "$it:"
         }
-        food_description_textView.text = recipe.foodDescription
-        ingredients_list_textView.text = recipe.ingredientsDescription
-        preparing_steps_textView.text = recipe.preparingDescription
+        foodDescription_textView_cooking.text = recipe.foodDescription
+        ingredientsList_textView_cooking.text = recipe.ingredientsDescription
+        preparingSteps_textView_cooking.text = recipe.preparingDescription
         recipe.images?.get(0)?.let {
             glide.load(it)
-                .into(food0_imageView)
+                .into(food0_imageView_cooking)
         }
         recipe.images?.get(1)?.let {
             glide.load(it)
-                .into(food1_imageView)
+                .into(food1_imageView_cooking)
         }
         recipe.images?.get(2)?.let {
             glide.load(it)
-                .into(food2_imageView)
+                .into(food2_imageView_cooking)
         }
     }
 
@@ -142,9 +142,9 @@ class CookingFragment @Inject constructor(
     }
 
     private fun setupOnClickListeners() {
-        food0_imageView.setOnClickListener(imageClickListener)
-        food1_imageView.setOnClickListener(imageClickListener)
-        food2_imageView.setOnClickListener(imageClickListener)
+        food0_imageView_cooking.setOnClickListener(imageClickListener)
+        food1_imageView_cooking.setOnClickListener(imageClickListener)
+        food2_imageView_cooking.setOnClickListener(imageClickListener)
     }
 
     private val imageClickListener = View.OnClickListener {
@@ -159,9 +159,9 @@ class CookingFragment @Inject constructor(
 
     private fun getIndex(view: View): Int =
         when (view.id) {
-            food0_imageView.id -> 0
-            food1_imageView.id -> 1
-            food2_imageView.id -> 2
+            food0_imageView_cooking.id -> 0
+            food1_imageView_cooking.id -> 1
+            food2_imageView_cooking.id -> 2
             else -> 666
         }
 
