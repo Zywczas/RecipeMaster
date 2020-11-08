@@ -14,17 +14,17 @@ import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.login.Login
 import com.facebook.login.LoginManager
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.utilities.NetworkCheck
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
-import io.mockk.verifySequence
+import io.mockk.*
+import io.mockk.impl.annotations.RelaxedMockK
 import io.reactivex.rxjava3.core.Flowable
 import org.hamcrest.core.IsNot.not
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -38,19 +38,31 @@ import org.robolectric.shadows.ShadowToast
 internal class LoginFragmentTest {
 
     private val network: NetworkCheck = mockk()
-    private val faceLoginManager: LoginManager = mockk(relaxed = true)
-    private val faceCallbackManager : CallbackManager = mockk(relaxed = true)
+    @RelaxedMockK
+    private lateinit var faceLoginManager: LoginManager
+    @RelaxedMockK
+    private lateinit var faceCallbackManager : CallbackManager
+    @RelaxedMockK
+    private lateinit var faceToken : AccessToken
     private val fragmentFactory : UniversalFragmentFactory = mockk()
 
     @Before
     fun setup(){
+        MockKAnnotations.init(this)
         every { network.isConnected } returns true
+        every { faceToken.isExpired } returns true
         every { fragmentFactory.instantiate(any(), any()) } returns
-                LoginFragment(network, faceLoginManager, faceCallbackManager)
+                LoginFragment(network, faceLoginManager, faceCallbackManager, faceToken)
+    }
+
+    @After
+    fun close(){
+        unmockkAll()
     }
 
     @Test
     fun isFragmentInView(){
+
         @Suppress("UNUSED_VARIABLE")
         val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
 

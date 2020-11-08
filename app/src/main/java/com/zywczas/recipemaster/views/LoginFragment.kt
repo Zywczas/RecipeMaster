@@ -18,7 +18,8 @@ import javax.inject.Inject
 class LoginFragment @Inject constructor(
     private val network: NetworkCheck,
     private val faceLoginManager: LoginManager,
-    private val faceCallbackManager : CallbackManager
+    private val faceCallbackManager : CallbackManager,
+    private val faceAccessToken : AccessToken?
 ) : Fragment(R.layout.fragment_login) {
 
     private var isLoggedIn = false
@@ -26,7 +27,7 @@ class LoginFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        logD("zalogowany na start: $isLoggedIn") //todo do usuniecia
+        logD("access token na start: $faceAccessToken ")
         checkIfLoggedInAndGetProfile()
         setupLoginManagerCallback()
         setupUi()
@@ -42,13 +43,16 @@ class LoginFragment @Inject constructor(
     }
 
     private fun checkIfLoggedIn(complete : (Boolean) -> Unit){
-        val accessToken = AccessToken.getCurrentAccessToken()
-        isLoggedIn = accessToken != null && accessToken.isExpired.not()
+        isLoggedIn = faceAccessToken != null && faceAccessToken.isExpired.not()
         complete(true)
     }
 
     private fun getFacebookProfile(){
         val profile = Profile.getCurrentProfile()
+        logD("profile: $profile i ${profile.firstName}")
+        logD("access token: $faceAccessToken ")
+//        val token = AccessToken.getCurrentAccessToken()
+//        logD("access token2: $token ")
         userName = profile?.name
     }
 

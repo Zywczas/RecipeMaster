@@ -4,6 +4,7 @@ import android.app.Application
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
+import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.login.LoginFragment
 import com.facebook.login.LoginManager
@@ -51,6 +52,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFacebookCallbackManager() : CallbackManager = CallbackManager.Factory.create()
+
+    @Provides
+    @Singleton
+    fun provideFacebookAccessToken() : AccessToken? = AccessToken.getCurrentAccessToken()
 
 
 }
