@@ -107,7 +107,7 @@ dependencies {
     // Testing Navigation
     testImplementation 'androidx.navigation:navigation-testing:2.3.0'
 
-    // Testing Fragments in Isolation - for Robolectric it needs to be debugImplemention
+    // Testing Fragments in Isolation - for Robolectric it needs to be debugImplementation
     debugImplementation "androidx.fragment:fragment-testing:1.2.5"
 
     //androidx.test

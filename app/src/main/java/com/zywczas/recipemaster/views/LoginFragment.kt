@@ -1,13 +1,10 @@
 package com.zywczas.recipemaster.views
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.view.WindowManager
-import androidx.core.graphics.alpha
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.facebook.*
 import com.facebook.login.LoginManager
@@ -88,14 +85,20 @@ class LoginFragment @Inject constructor(
                 return false
             }
             override fun onToggleChanged(isOpen: Boolean) {
-                if (isOpen){
-                    constraintLayout_login.alpha = 0.3F
-                } else {
-                    constraintLayout_login.alpha = 1F
-                }
+                dimOrRestoreBackground(isOpen)
             }
-
         })
+    }
+
+    private fun dimOrRestoreBackground(isDialOpen : Boolean){
+        val window = requireActivity().window
+        if (isDialOpen){
+            window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark_0_3)
+            constraintLayout_login.alpha = 0.3F
+        } else {
+            window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark)
+            constraintLayout_login.alpha = 1F
+        }
     }
 
     private fun setupSpeedDialMenuClick(){

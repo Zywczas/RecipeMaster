@@ -97,6 +97,21 @@ class LoginFragmentTest {
         onView(withText(getRecipe)).check(matches(isDisplayed()))
         onView(withText(faceLogin)).check(matches(isDisplayed()))
     }
+//todo
+//    @Test
+//    fun isBackgroundDimmedOnSpeedDialClick(){
+//        @Suppress("UNUSED_VARIABLE")
+//        val scenario = launchFragmentInContainer<LoginFragment>(
+//            factory = fragmentFactory,
+//            themeResId = R.style.AppTheme
+//        )
+//        onView(withId(R.id.speedDial_login)).perform(click())
+//
+//        onView(withId(R.id.get_recipe_menuItem)).check(matches(isDisplayed()))
+//        onView(withId(R.id.facebook_menuItem)).check(matches(isDisplayed()))
+//        onView(withText(getRecipe)).check(matches(isDisplayed()))
+//        onView(withText(faceLogin)).check(matches(isDisplayed()))
+//    }
 
     @Test
     fun fragmentDestroyed_isInstanceStateSavedAndRestored(){
@@ -149,8 +164,6 @@ class LoginFragmentTest {
         assertEquals(R.id.destination_cooking, navController.currentDestination?.id)
         assertEquals(expectedArgument, actualArgument)
     }
-
-    //todo czy jak sie kliknie speed dial to wygasza tlo
 
 
 }

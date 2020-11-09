@@ -7,8 +7,8 @@ import org.junit.runner.RunWith
 @RunWith(JUnitPlatform::class)
 @SelectPackages(
     "com.zywczas.recipemaster.model",
-    "com.zywczas.recipemaster.utilities"
+    "com.zywczas.recipemaster.utilities",
+    "com.zywczas.recipemaster.viewmodels",
+    "com.zywczas.recipemaster.views"
 )
 class AllTestsSuite
-
-//todo usunac to noname z junit vintage - pewnie bierze klase ktora usunalem z androidTest

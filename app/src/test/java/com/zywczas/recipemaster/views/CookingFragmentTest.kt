@@ -1,8 +1,5 @@
 package com.zywczas.recipemaster.views
 
-import android.os.Looper
-import android.os.Looper.*
-import android.widget.TextView
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.Navigation
@@ -34,12 +31,8 @@ import org.hamcrest.CoreMatchers.not
 import org.junit.*
 import org.junit.Assert.*
 import org.junit.runner.RunWith
-import org.robolectric.Shadows
-import org.robolectric.Shadows.*
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowAlertDialog
-import org.robolectric.shadows.ShadowDialog
-import org.robolectric.shadows.ShadowToast
 
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.PAUSED)
@@ -236,10 +229,6 @@ class CookingFragmentTest {
 
     @Test
     fun clickOnImage_isDialogShowingUp(){
-        val questionText = app.getString(R.string.sure_save_image)
-        val yesText = app.getString(R.string.yes)
-        val noText = app.getString(R.string.no)
-
         @Suppress("UNUSED_VARIABLE")
         val scenario = launchFragmentInContainer(
             fragmentArgs = bundle,
@@ -253,38 +242,13 @@ class CookingFragmentTest {
                 }
             }
         }
+        food0.perform(scrollTo(), click())
 
-        food0.perform(scrollTo())
-        shadowOf(getMainLooper()).idle()
-        food0.perform(click())
-//        foodName.check(matches(withText("dziala")))
-
-
-//        shadowOf(getMainLooper()).idle()
-        assertEquals(1, ShadowToast.shownToastCount())
-//        onView(withText(questionText)).check(matches(isDisplayed()))
-//        onView(withText(questionText)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
-//        val cos = ShadowAlertDialog().items
-//        println("allerta dialog: ${cos[0]}")
-
-//            .view.findViewById<TextView>(R.id.question_textView_saveDialog)
-//        assertEquals(questionText, cos.text)
-
-
-//        saveImageDialog.check(matches(isDisplayed()))
-//        question.check(matches(isDisplayed())).check(matches(withText(questionText)))
-//        yes.check(matches(isDisplayed())).check(matches(withText(yesText)))
-//        no.check(matches(isDisplayed())).check(matches(withText(noText)))
+        assertEquals(1, ShadowAlertDialog.getShownDialogs().size)
     }
 
-
-    //todo czy klikanie na obrazek pokazuje dialog
-
-    //todo cz jak sie kliknie dialog to pyta o pozwolenie
+    //todo czy jak sie kliknie dialog to pyta o pozwolenie
 
     //todo czy jak sie pobierze obrazek to pokazuje dialog
-
-
-
 
 }
