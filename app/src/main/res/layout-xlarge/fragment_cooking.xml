@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_cooking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red3"
+        android:theme="@style/ToolbarTheme"
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/food0_imageView_cooking"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="@string/food_one"
+                android:scaleType="centerCrop"
+                android:tag="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/food1_imageView_cooking"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imagesTitle_textView_cooking"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/foodName_textView_cooking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="food name:" />
+
+            <TextView
+                android:id="@+id/foodDescription_textView_cooking"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="45dp"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/foodName_textView_cooking"
+                tools:text="food description food description food description food description food description food description food description " />
+
+            <TextView
+                android:id="@+id/ingredientsTitle_textView_cooking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/ingredients"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/foodDescription_textView_cooking" />
+
+            <TextView
+                android:id="@+id/ingredientsList_textView_cooking"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="45dp"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientsTitle_textView_cooking"
+                tools:text='"-1 szklanka ciepłej wody",  \n"-50g świeżych drożdży",   ' />
+
+            <TextView
+                android:id="@+id/preparingTitle_textView_cooking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/preparing"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientsList_textView_cooking" />
+
+            <TextView
+                android:id="@+id/preparingSteps_textView_cooking"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="45dp"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/preparingTitle_textView_cooking"
+                tools:text='"1. Suche składniki dokładnie mieszamy.",  \n"2. Drożdże zalawamy ciepłą wodą, olejem i cukrem. Odstawiamy do wyrośnięcia."' />
+
+            <TextView
+                android:id="@+id/imagesTitle_textView_cooking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/images"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/preparingSteps_textView_cooking" />
+
+            <ImageView
+                android:id="@+id/food2_imageView_cooking"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/food_three"
+                android:scaleType="centerCrop"
+                android:tag="2"
+                app:layout_constraintBottom_toBottomOf="@+id/food1_imageView_cooking"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/food1_imageView_cooking"
+                app:layout_constraintTop_toTopOf="@+id/food1_imageView_cooking"
+                tools:src="@tools:sample/avatars" />
+
+            <ImageView
+                android:id="@+id/food1_imageView_cooking"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:contentDescription="@string/food_two"
+                android:scaleType="centerCrop"
+                android:tag="1"
+                app:layout_constraintBottom_toBottomOf="@+id/food0_imageView_cooking"
+                app:layout_constraintEnd_toStartOf="@+id/food2_imageView_cooking"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/food0_imageView_cooking"
+                app:layout_constraintTop_toTopOf="@+id/food0_imageView_cooking"
+                tools:src="@tools:sample/avatars" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_cooking"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>
