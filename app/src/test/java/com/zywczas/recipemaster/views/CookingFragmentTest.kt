@@ -41,6 +41,7 @@ class CookingFragmentTest {
     private lateinit var viewModelFactory: UniversalViewModelFactory
     private val fragmentFactory = mockk<UniversalFragmentFactory>()
     private val bundle = LoginFragmentDirections.actionToCooking("James Blad").arguments
+    private val userName = "James Blad"
     private val returnedRecipe = Flowable.just(Resource.success(TestUtil.recipe1))
     private val app = ApplicationProvider.getApplicationContext<BaseApplication>()
     private val navController = TestNavHostController(app)
@@ -64,6 +65,8 @@ class CookingFragmentTest {
 
     @Test
     fun isFragmentInView() {
+        val snackbarText = "${app.getString(R.string.logged_as)} $userName"
+
         @Suppress("UNUSED_VARIABLE")
         val scenario = launchFragmentInContainer(
             fragmentArgs = bundle,
@@ -96,6 +99,7 @@ class CookingFragmentTest {
         onView(withId(R.id.food1_imageView_cooking)).check(matches(isDisplayed()))
         onView(withId(R.id.food2_imageView_cooking)).perform(scrollTo())
             .check(matches(isDisplayed()))
+        onView(withText(snackbarText)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -132,6 +136,8 @@ class CookingFragmentTest {
         onView(withId(R.id.imagesTitle_textView_cooking)).perform(scrollTo())
             .check(matches(withText(app.getString(R.string.images))))
     }
+
+
 
 
 }
