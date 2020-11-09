@@ -8,7 +8,6 @@ import com.facebook.AccessToken
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Suppress("RedundantSetter")
 @Singleton
 class SessionManager @Inject constructor(
     private val app: Application
@@ -16,8 +15,7 @@ class SessionManager @Inject constructor(
 
     var isConnected = false
         private set
-    var isLoggedIn: Boolean = false
-        set(value) { field = value}
+    var isLoggedIn = false
         get() = if (field) {field} else {
             val token = AccessToken.getCurrentAccessToken()
             field = token != null && token.isExpired.not()
@@ -41,7 +39,6 @@ class SessionManager @Inject constructor(
                 super.onLost(network)
                 isConnected = false
             }
-
         })
     }
 
