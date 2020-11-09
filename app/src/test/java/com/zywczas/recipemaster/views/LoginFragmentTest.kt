@@ -56,7 +56,10 @@ class LoginFragmentTest {
     @Test
     fun isFragmentInView(){
         @Suppress("UNUSED_VARIABLE")
-        val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
+        val scenario = launchFragmentInContainer<LoginFragment>(
+            factory = fragmentFactory,
+            themeResId = R.style.AppTheme
+        )
 
         onView(withId(R.id.toolbar_login)).check(matches(isDisplayed()))
         onView(withId(R.id.food_imageView_login)).check(matches(isDisplayed()))
@@ -71,7 +74,10 @@ class LoginFragmentTest {
         val appName = app.getString(R.string.app_name)
 
         @Suppress("UNUSED_VARIABLE")
-        val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
+        val scenario = launchFragmentInContainer<LoginFragment>(
+            factory = fragmentFactory,
+            themeResId = R.style.AppTheme
+        )
 
         onView(withId(R.id.appName_textView_login)).check(matches(withText(appName)))
         onView(withId(R.id.toolbar_login)).check(matches(hasDescendant(withText(appName))))
@@ -80,7 +86,10 @@ class LoginFragmentTest {
     @Test
     fun isSpeedDialWorking(){
         @Suppress("UNUSED_VARIABLE")
-        val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
+        val scenario = launchFragmentInContainer<LoginFragment>(
+            factory = fragmentFactory,
+            themeResId = R.style.AppTheme
+        )
         onView(withId(R.id.speedDial_login)).perform(click())
 
         onView(withId(R.id.get_recipe_menuItem)).check(matches(isDisplayed()))
@@ -91,7 +100,10 @@ class LoginFragmentTest {
 
     @Test
     fun fragmentDestroyed_isInstanceStateSavedAndRestored(){
-        val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
+        val scenario = launchFragmentInContainer<LoginFragment>(
+            factory = fragmentFactory,
+            themeResId = R.style.AppTheme
+        )
         onView(withId(R.id.speedDial_login)).perform(click())
         scenario.recreate()
 
@@ -108,7 +120,10 @@ class LoginFragmentTest {
         every { session.isLoggedIn } returns false
 
         @Suppress("UNUSED_VARIABLE")
-        val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
+        val scenario = launchFragmentInContainer<LoginFragment>(
+            factory = fragmentFactory,
+            themeResId = R.style.AppTheme
+        )
         onView(withId(R.id.speedDial_login)).perform(click())
         onView(withId(R.id.facebook_menuItem)).perform(click())
 
@@ -122,7 +137,10 @@ class LoginFragmentTest {
         navController.setGraph(R.navigation.main_nav_graph)
         navController.setCurrentDestination(R.id.destination_login)
 
-        val scenario = launchFragmentInContainer<LoginFragment>(factory = fragmentFactory)
+        val scenario = launchFragmentInContainer<LoginFragment>(
+            factory = fragmentFactory,
+            themeResId = R.style.AppTheme
+        )
         scenario.onFragment { Navigation.setViewNavController(it.requireView(), navController) }
         onView(withId(R.id.speedDial_login)).perform(click())
         onView(withId(R.id.get_recipe_menuItem)).perform(click())

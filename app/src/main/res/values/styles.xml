@@ -1,14 +1,69 @@
-<resources>
-    <!-- Base application theme. -->
-    <style name="MyAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+<resources xmlns:tools="http://schemas.android.com/tools">
+<!-- Base application theme. -->
+<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+</style>
 
-    <style name="ToolbarTheme" parent="ThemeOverlay.MaterialComponents.ActionBar">
-        <item name="android:textColorPrimary">@android:color/white</item>
-    </style>
+<style name="ToolbarTheme" parent="ThemeOverlay.MaterialComponents.ActionBar">
+    <item name="android:textColorPrimary">@android:color/white</item>
+</style>
+
 
 </resources>
+
+<!--<resources xmlns:tools="http://schemas.android.com/tools">-->
+    <!-- Base application theme. -->
+<!--    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/colorPrimary</item>-->
+<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+<!--        <item name="colorAccent">@color/colorAccent</item>-->
+
+<!--        &lt;!&ndash; Snackbar &ndash;&gt;-->
+<!--        <item name="snackbarStyle">@style/MaterialSnackbarTheme</item>-->
+<!--        <item name="snackbarButtonStyle">@style/MaterialSnackbarTextButtonTheme</item>-->
+<!--        <item name="snackbarTextViewStyle">@style/MaterialSnackbarTextViewTheme</item>-->
+<!--    </style>-->
+
+<!--    <style name="MaterialSnackbarTheme" parent="@style/Widget.MaterialComponents.Snackbar">-->
+<!--        &lt;!&ndash; <item name="backgroundTint">#00cc77</item>&ndash;&gt;-->
+<!--&lt;!&ndash;         <item name="android:background">@drawable/snackbar_background</item>&ndash;&gt;-->
+<!--        <item name="android:background">#00cc77</item>-->
+<!--        <item name="cornerRadius">0dp</item>-->
+<!--        <item name="android:layout_margin">0dp</item>-->
+<!--        <item name="actionTextColorAlpha">1.0</item>-->
+<!--    </style>-->
+
+<!--    <style name="MaterialSnackbarTextButtonTheme" parent="@style/Widget.MaterialComponents.Button.TextButton.Snackbar">-->
+<!--        <item name="backgroundTint">#7777ff</item>-->
+<!--        <item name="android:textColor">#ffffff</item>-->
+<!--    </style>-->
+
+<!--    <style name="MaterialSnackbarTextViewTheme" parent="@style/Widget.MaterialComponents.Snackbar.TextView">-->
+<!--        <item name="android:textColor">#ffffff</item>-->
+<!--        <item name="android:alpha">1.0</item>-->
+<!--    </style>-->
+
+<!--    <style name="ToolbarTheme" parent="ThemeOverlay.MaterialComponents.ActionBar">-->
+<!--        <item name="android:textColorPrimary">@android:color/white</item>-->
+<!--        <item name="actionBarSize">56dp</item>-->
+<!--    </style>-->
+
+    <!--    <style name="SnackBarTheme" parent="@style/Widget.MaterialComponents.Snackbar">-->
+    <!--        <item name=""-->
+    <!--        -->
+    <!--    </style>-->
+
+<!--    <style name="Widget.MaterialComponents.Button.TextButton.Snackbar." parent="android:Widget.Button" tools:overrride="true">-->
+<!--        <item name="backgroundTint">@color/red3</item>-->
+<!--        <item name="android:textColor">@color/blue2</item>-->
+<!--    </style>-->
+
+<!--    <style name="snackbar_text" parent="@style/Widget.MaterialComponents.Snackbar.TextView">-->
+<!--        <item name="android:textColor">@color/blue2</item>-->
+<!--    </style>-->
+
+<!--</resources>-->

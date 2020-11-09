@@ -102,10 +102,12 @@ class LoginFragment @Inject constructor(
         speedDial_login.setOnActionSelectedListener { item ->
             when(item.id){
                 R.id.get_recipe_menuItem -> {
+                    speedDial_login.close()
                     goToCookingFragmentIfConnected()
                     true
                 }
                 R.id.facebook_menuItem -> {
+                    speedDial_login.close()
                     loginWithFacebookIfConnected()
                     true
                 }

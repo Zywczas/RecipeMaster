@@ -52,7 +52,8 @@ class CookingFragmentTest {
         @Suppress("UNUSED_VARIABLE")
         val scenario = launchFragmentInContainer<CookingFragment>(
             factory = fragmentFactory,
-            fragmentArgs = bundle
+            fragmentArgs = bundle,
+            themeResId = R.style.AppTheme
         )
 
         onView(withId(R.id.toolbar_cooking)).check(matches(isDisplayed()))
