@@ -59,9 +59,6 @@ class CookingFragment @Inject constructor(
     }
     private var requestedImageUrl: String? = null
     private val photoUrlKey by lazyAndroid { "photo key" }
-//    private val navHostFragment by lazyAndroid { parentFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment }
-//    private val navController by lazyAndroid { navHostFragment.navController }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +81,6 @@ class CookingFragment @Inject constructor(
         val welcomeMsg = "${getString(R.string.logged_as)} $userName"
         showSnackbar(welcomeMsg)
         setupOnClickListeners()
-//        toolbar_cooking.setupWithNavController(navController, appBarConfig)
         toolbar_cooking.setupWithNavController(findNavController(), appBarConfig)
     }
 
