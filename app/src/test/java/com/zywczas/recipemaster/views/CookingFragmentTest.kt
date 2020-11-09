@@ -5,6 +5,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -135,6 +136,42 @@ class CookingFragmentTest {
             .check(matches(withText(recipe.preparingDescription)))
         onView(withId(R.id.imagesTitle_textView_cooking)).perform(scrollTo())
             .check(matches(withText(app.getString(R.string.images))))
+    }
+
+    @Test
+    fun fragmentDestroyed_isInstanceStateSavedAndRestored(){
+        val snackbarText = "${app.getString(R.string.logged_as)} $userName"
+        val recipe = TestUtil.recipe1
+        val toolbarTitle = "${recipe.title} ${app.getString(R.string.recipe)}"
+
+        @Suppress("UNUSED_VARIABLE")
+        val scenario = launchFragmentInContainer(
+            fragmentArgs = bundle,
+            themeResId = R.style.AppTheme
+        ) {
+            CookingFragment(viewModelFactory, glide).also { fragment ->
+                fragment.viewLifecycleOwnerLiveData.observeForever { viewLifeCycleOwner ->
+                    if (viewLifeCycleOwner != null) {
+                        Navigation.setViewNavController(fragment.requireView(), navController)
+                    }
+                }
+            }
+        }
+
+        onView(withId(R.id.toolbar_cooking)).check(matches(hasDescendant(withText(toolbarTitle))))
+        onView(withId(R.id.foodName_textView_cooking)).check(matches(withText("${recipe.title}:")))
+        onView(withId(R.id.foodDescription_textView_cooking))
+            .check(matches(withText(recipe.foodDescription)))
+        onView(withId(R.id.ingredientsList_textView_cooking)).perform(scrollTo())
+            .check(matches(withText(recipe.ingredientsDescription)))
+        onView(withId(R.id.preparingSteps_textView_cooking)).perform(scrollTo())
+            .check(matches(withText(recipe.preparingDescription)))
+        onView(withText(snackbarText)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun getError_observeMessage(){
+
     }
 
 

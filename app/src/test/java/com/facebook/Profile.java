@@ -1,10 +1,6 @@
 package com.facebook;
 
-import android.net.Uri;
-
 import androidx.annotation.Nullable;
-
-import java.net.URI;
 
 public class Profile {
 
