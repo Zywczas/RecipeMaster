@@ -52,7 +52,7 @@ class CookingFragmentTest {
     private val app = ApplicationProvider.getApplicationContext<BaseApplication>()
     private val navController = TestNavHostController(app)
 
-    //main layout
+    //fragment layout
     private val toolbar = onView(withId(R.id.toolbar_cooking))
     private val foodName = onView(withId(R.id.foodName_textView_cooking))
     private val foodDescription = onView(withId(R.id.foodDescription_textView_cooking))
@@ -250,8 +250,10 @@ class CookingFragmentTest {
         assertEquals(1, ShadowAlertDialog.getShownDialogs().size)
     }
 
-    //todo czy jak sie kliknie dialog to pyta o pozwolenie
+    //todo isAskingForPermissionAfterClickingDialog
 
-    //todo czy jak sie pobierze obrazek to pokazuje dialog
+    //todo isConfirmationDialogShownAfterSavingImage
+
+    //todo isErrorDialogShownAfterSavingImage
 
 }

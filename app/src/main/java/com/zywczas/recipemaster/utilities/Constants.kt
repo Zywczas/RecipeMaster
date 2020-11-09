@@ -1,9 +1,3 @@
 package com.zywczas.recipemaster.utilities
 
-//todo usunac ten plik
-
-////todo usunac nieuzywane importy
-
-//todo przejrzec wszystkie klasy
-
-//todo pousuwac niektore logi
+const val BASE_URL = "https://moodup.team/"

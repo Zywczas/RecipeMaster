@@ -8,6 +8,7 @@ import com.facebook.CallbackManager
 import com.facebook.login.LoginManager
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.model.webservice.RecipeRestApiService
+import com.zywczas.recipemaster.utilities.BASE_URL
 import dagger.Module
 import dagger.Provides
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
@@ -21,7 +22,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl("https://moodup.team/")
+        .baseUrl(BASE_URL)
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .build()

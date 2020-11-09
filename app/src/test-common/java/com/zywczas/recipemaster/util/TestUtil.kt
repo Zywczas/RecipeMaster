@@ -25,7 +25,6 @@ object TestUtil {
         listOf("http://mooduplabs.com/test/pizza1.jpg", "http://mooduplabs.com/test/pizza2.jpg", "http://mooduplabs.com/test/pizza3.jpg")
     )
 
-
     val recipe2 = Recipe(
         "Pomidorowa",
         "Pomidorowa też jest dobra.",

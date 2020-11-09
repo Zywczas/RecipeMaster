@@ -37,4 +37,10 @@
     <string name="preparing">Preparing:</string>
     <string name="images">Images:</string>
 
+<!--    content descriptions-->
+    <string name="message_dialog">message dialog</string>
+    <string name="food_one">food one</string>
+    <string name="food_two">food two</string>
+    <string name="food_three">food three</string>
+
 </resources>

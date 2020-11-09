@@ -180,7 +180,7 @@ class CookingFragment @Inject constructor(
         if (arePermissionsGranted) {
             downloadAndSaveImage()
         } else {
-            askForPermissionsAndSavePhoto()
+            askForPermissionsAndSavePhotoOnPermissionResult()
         }
     }
 
@@ -240,7 +240,7 @@ class CookingFragment @Inject constructor(
         builder.show()
     }
 
-    private fun askForPermissionsAndSavePhoto() {
+    private fun askForPermissionsAndSavePhotoOnPermissionResult() {
         requestPermissions(permissions, storageRequestCode)
     }
 

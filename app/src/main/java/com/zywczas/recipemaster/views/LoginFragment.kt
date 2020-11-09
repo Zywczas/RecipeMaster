@@ -32,7 +32,7 @@ class LoginFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
         checkIfLoggedInAndGetProfile()
         setupLoginManagerCallback()
-        setupUi()
+        displayUI()
         setupOnClickListeners()
     }
 
@@ -73,7 +73,7 @@ class LoginFragment @Inject constructor(
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun setupUi(){
+    private fun displayUI(){
         speedDial_login.inflate(R.menu.menu_speed_dial)
     }
 

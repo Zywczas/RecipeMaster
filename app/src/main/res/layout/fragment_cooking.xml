@@ -122,7 +122,8 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imagesTitle_textView_cooking"
-                    tools:src="@tools:sample/avatars" />
+                    tools:src="@tools:sample/avatars"
+                    android:contentDescription="@string/food_one" />
 
                 <ImageView
                     android:id="@+id/food1_imageView_cooking"
@@ -137,7 +138,8 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/food0_imageView_cooking"
                     app:layout_constraintTop_toTopOf="@+id/food0_imageView_cooking"
-                    tools:src="@tools:sample/avatars" />
+                    tools:src="@tools:sample/avatars"
+                    android:contentDescription="@string/food_two" />
 
                 <ImageView
                     android:id="@+id/food2_imageView_cooking"
@@ -151,7 +153,8 @@
                     app:layout_constraintEnd_toEndOf="@+id/food0_imageView_cooking"
                     app:layout_constraintStart_toStartOf="@+id/food0_imageView_cooking"
                     app:layout_constraintTop_toBottomOf="@+id/food0_imageView_cooking"
-                    tools:src="@tools:sample/avatars" />
+                    tools:src="@tools:sample/avatars"
+                    android:contentDescription="@string/food_three" />
 
                 <ProgressBar
                     android:id="@+id/progressBar_cooking"

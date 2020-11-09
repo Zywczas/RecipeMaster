@@ -9,8 +9,8 @@ public class Profile {
     public Profile() {}
 
     private final @Nullable String lastName = "Blad";
-    private final @Nullable String firstName = "James";
     private final @Nullable String name = "James Blad";
+    private final @Nullable String firstName = "James";
     private final @Nullable String middleName = "Double oh seven";
     private final @Nullable String url = "https://www.facebook.com/";
     private final @Nullable String id = "007";
