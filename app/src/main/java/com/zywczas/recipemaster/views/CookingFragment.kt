@@ -211,14 +211,19 @@ class CookingFragment @Inject constructor(
 
     private fun saveImageToGallery(bitmap: Bitmap, imageName: String) {
         var fos: OutputStream? = null
-        context?.contentResolver?.also { resolver ->
+        try {
+            val resolver = requireContext().contentResolver
             val contentValues = getContentValues(imageName)
-            val imageUri: Uri? =
-                resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-            fos = imageUri?.let { resolver.openOutputStream(it) }
+            val imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+            fos = resolver.openOutputStream(imageUri!!)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+            fos!!.close()
+            showInfoDialog(getString(R.string.image_saved))
+        } catch (e: Exception){
+            fos?.close()
+            logD(e)
+            showInfoDialog(getString(R.string.image_saving_error))
         }
-        fos?.use { bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it) }
-        showInfoDialog(getString(R.string.image_saved))
     }
 
     private fun getContentValues(imageName: String) : ContentValues {

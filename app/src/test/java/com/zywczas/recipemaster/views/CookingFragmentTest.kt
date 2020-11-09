@@ -5,6 +5,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -47,6 +48,7 @@ class CookingFragmentTest {
     private val app = ApplicationProvider.getApplicationContext<BaseApplication>()
     private val navController = TestNavHostController(app)
 
+    //main layout
     private val toolbar = onView(withId(R.id.toolbar_cooking))
     private val foodName = onView(withId(R.id.foodName_textView_cooking))
     private val foodDescription = onView(withId(R.id.foodDescription_textView_cooking))
@@ -59,6 +61,12 @@ class CookingFragmentTest {
     private val food0 = onView(withId(R.id.food0_imageView_cooking))
     private val food1 = onView(withId(R.id.food1_imageView_cooking))
     private val food2 = onView(withId(R.id.food2_imageView_cooking))
+
+    //save image dialog
+    private val saveImageDialog = onView(withId(R.id.saveImage_dialog))
+    private val question = onView(withId(R.id.question_textView_saveDialog))
+    private val yes = onView(withId(R.id.yes_textView_dialog))
+    private val no = onView(withId(R.id.no_textView_dialog))
 
     @Before
     fun setup() {
@@ -79,8 +87,6 @@ class CookingFragmentTest {
 
     @Test
     fun isFragmentInView() {
-        val snackbarText = "${app.getString(R.string.logged_as)} $userName"
-
         @Suppress("UNUSED_VARIABLE")
         val scenario = launchFragmentInContainer(
             fragmentArgs = bundle,
@@ -107,7 +113,6 @@ class CookingFragmentTest {
         food0.perform(scrollTo()).check(matches(isDisplayed()))
         food1.check(matches(isDisplayed()))
         food2.perform(scrollTo()).check(matches(isDisplayed()))
-        onView(withText(snackbarText)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -137,6 +142,27 @@ class CookingFragmentTest {
         preparingTitle.perform(scrollTo()).check(matches(withText(app.getString(R.string.preparing))))
         preparingSteps.perform(scrollTo()).check(matches(withText(recipe.preparingDescription)))
         imagesTitle.perform(scrollTo()).check(matches(withText(app.getString(R.string.images))))
+    }
+
+    @Test
+    fun isDataFromDirectionsDisplayed(){
+        val snackbarText = "${app.getString(R.string.logged_as)} $userName"
+
+        @Suppress("UNUSED_VARIABLE")
+        val scenario = launchFragmentInContainer(
+            fragmentArgs = bundle,
+            themeResId = R.style.AppTheme
+        ) {
+            CookingFragment(viewModelFactory, glide).also { fragment ->
+                fragment.viewLifecycleOwnerLiveData.observeForever { viewLifeCycleOwner ->
+                    if (viewLifeCycleOwner != null) {
+                        Navigation.setViewNavController(fragment.requireView(), navController)
+                    }
+                }
+            }
+        }
+
+        onView(withText(snackbarText)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -195,6 +221,43 @@ class CookingFragmentTest {
         preparingSteps.check(matches(withText("")))
         onView(withText(expectedMessage)).check(matches(isDisplayed()))
     }
+
+    @Test
+    fun clickOnImage_isDialogShowingUp(){
+        val questionText = app.getString(R.string.sure_save_image)
+        val yesText = app.getString(R.string.yes)
+        val noText = app.getString(R.string.no)
+
+        @Suppress("UNUSED_VARIABLE")
+        val scenario = launchFragmentInContainer(
+            fragmentArgs = bundle,
+            themeResId = R.style.AppTheme
+        ) {
+            CookingFragment(viewModelFactory, glide).also { fragment ->
+                fragment.viewLifecycleOwnerLiveData.observeForever { viewLifeCycleOwner ->
+                    if (viewLifeCycleOwner != null) {
+                        Navigation.setViewNavController(fragment.requireView(), navController)
+                    }
+                }
+            }
+        }
+
+        food0.perform(scrollTo(), click())
+//        onView(withText(questionText)).check(matches(isDisplayed()))
+        onView(withText(questionText)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+
+//        saveImageDialog.check(matches(isDisplayed()))
+//        question.check(matches(isDisplayed())).check(matches(withText(questionText)))
+//        yes.check(matches(isDisplayed())).check(matches(withText(yesText)))
+//        no.check(matches(isDisplayed())).check(matches(withText(noText)))
+    }
+
+
+    //todo czy klikanie na obrazek pokazuje dialog
+
+    //todo cz jak sie kliknie dialog to pyta o pozwolenie
+
+    //todo czy jak sie pobierze obrazek to pokazuje dialog
 
 
 

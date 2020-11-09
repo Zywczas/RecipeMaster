@@ -150,6 +150,7 @@ class LoginFragmentTest {
         assertEquals(expectedArgument, actualArgument)
     }
 
+    //todo czy jak sie kliknie speed dial to wygasza tlo
 
 
 }
