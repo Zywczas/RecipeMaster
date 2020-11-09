@@ -1,4 +1,7 @@
 <resources>
+    <!--    don't translate -->
+    <string name="facebook_app_id">666053657437502</string>
+
     <!--    general-->
     <string name="app_name">RecipeMaster</string>
     <string name="recipe">Recipe!</string>
@@ -6,9 +9,6 @@
     <string name="no">Cancel</string>
     <string name="general_restapi_error">"Problem with downloading recipe. Check connection and try again."</string>
     <string name="permission_warning">"Grant access to proceed."</string>
-
-<!--    UI values-->
-    <string name="get_recipe">Get the recipe</string>
 
     <!--t    UI values PL  -->
     <string name="login_with_facebook">Zaloguj przez Facebooka</string>
@@ -31,9 +31,10 @@
     <string name="login_problem_facebook">"Problem with login to Facebook. Try again later."</string>
     <string name="not_logged_in">not logged in</string>
 
-
-
-<!--    don't translate -->
-    <string name="facebook_app_id">666053657437502</string>
+    <!--    UI values-->
+    <string name="get_recipe">Get the recipe</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="preparing">Preparing:</string>
+    <string name="images">Images:</string>
 
 </resources>
