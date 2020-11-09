@@ -5,7 +5,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -13,6 +12,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.bumptech.glide.RequestManager
 import com.zywczas.recipemaster.BaseApplication
 import com.zywczas.recipemaster.R
+import com.zywczas.recipemaster.model.Recipe
 import com.zywczas.recipemaster.model.repositories.CookingRepository
 import com.zywczas.recipemaster.util.TestUtil
 import com.zywczas.recipemaster.utilities.Resource
@@ -24,6 +24,7 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.unmockkAll
 import io.reactivex.rxjava3.core.Flowable
+import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.CoreMatchers.not
 import org.junit.After
 import org.junit.Before
@@ -37,7 +38,6 @@ class CookingFragmentTest {
 
     private val glide = mockk<RequestManager>(relaxed = true)
     private val repo = mockk<CookingRepository>()
-
     @MockK
     private lateinit var viewModelFactory: UniversalViewModelFactory
     private val fragmentFactory = mockk<UniversalFragmentFactory>()
@@ -46,6 +46,19 @@ class CookingFragmentTest {
     private val returnedRecipe = Flowable.just(Resource.success(TestUtil.recipe1))
     private val app = ApplicationProvider.getApplicationContext<BaseApplication>()
     private val navController = TestNavHostController(app)
+
+    private val toolbar = onView(withId(R.id.toolbar_cooking))
+    private val foodName = onView(withId(R.id.foodName_textView_cooking))
+    private val foodDescription = onView(withId(R.id.foodDescription_textView_cooking))
+    private val ingredientsTitle = onView(withId(R.id.ingredientsTitle_textView_cooking))
+    private val ingredientsList = onView(withId(R.id.ingredientsList_textView_cooking))
+    private val preparingTitle = onView(withId(R.id.preparingTitle_textView_cooking))
+    private val preparingSteps = onView(withId(R.id.preparingSteps_textView_cooking))
+    private val progressBar = onView(withId(R.id.progressBar_cooking))
+    private val imagesTitle = onView(withId(R.id.imagesTitle_textView_cooking))
+    private val food0 = onView(withId(R.id.food0_imageView_cooking))
+    private val food1 = onView(withId(R.id.food1_imageView_cooking))
+    private val food2 = onView(withId(R.id.food2_imageView_cooking))
 
     @Before
     fun setup() {
@@ -82,24 +95,18 @@ class CookingFragmentTest {
             }
         }
 
-        onView(withId(R.id.toolbar_cooking)).check(matches(isDisplayed()))
-        onView(withId(R.id.foodName_textView_cooking)).check(matches(isDisplayed()))
-        onView(withId(R.id.foodDescription_textView_cooking)).check(matches(isDisplayed()))
-        onView(withId(R.id.ingredientsTitle_textView_cooking)).check(matches(isDisplayed()))
-        onView(withId(R.id.ingredientsList_textView_cooking)).perform(scrollTo())
-            .check(matches(isDisplayed()))
-        onView(withId(R.id.preparingTitle_textView_cooking)).perform(scrollTo())
-            .check(matches(isDisplayed()))
-        onView(withId(R.id.preparingSteps_textView_cooking)).perform(scrollTo())
-            .check(matches(isDisplayed()))
-        onView(withId(R.id.progressBar_cooking)).check(matches(not(isDisplayed())))
-        onView(withId(R.id.imagesTitle_textView_cooking)).perform(scrollTo())
-            .check(matches(isDisplayed()))
-        onView(withId(R.id.food0_imageView_cooking)).perform(scrollTo())
-            .check(matches(isDisplayed()))
-        onView(withId(R.id.food1_imageView_cooking)).check(matches(isDisplayed()))
-        onView(withId(R.id.food2_imageView_cooking)).perform(scrollTo())
-            .check(matches(isDisplayed()))
+        toolbar.check(matches(isDisplayed()))
+        foodName.check(matches(isDisplayed()))
+        foodDescription.check(matches(isDisplayed()))
+        ingredientsTitle.check(matches(isDisplayed()))
+        ingredientsList.perform(scrollTo()).check(matches(isDisplayed()))
+        preparingTitle.perform(scrollTo()).check(matches(isDisplayed()))
+        preparingSteps.perform(scrollTo()).check(matches(isDisplayed()))
+        progressBar.check(matches(not(isDisplayed())))
+        imagesTitle.perform(scrollTo()).check(matches(isDisplayed()))
+        food0.perform(scrollTo()).check(matches(isDisplayed()))
+        food1.check(matches(isDisplayed()))
+        food2.perform(scrollTo()).check(matches(isDisplayed()))
         onView(withText(snackbarText)).check(matches(isDisplayed()))
     }
 
@@ -122,20 +129,14 @@ class CookingFragmentTest {
             }
         }
 
-        onView(withId(R.id.toolbar_cooking)).check(matches(hasDescendant(withText(toolbarTitle))))
-        onView(withId(R.id.foodName_textView_cooking)).check(matches(withText("${recipe.title}:")))
-        onView(withId(R.id.foodDescription_textView_cooking))
-            .check(matches(withText(recipe.foodDescription)))
-        onView(withId(R.id.ingredientsTitle_textView_cooking))
-            .check(matches(withText(app.getString(R.string.ingredients))))
-        onView(withId(R.id.ingredientsList_textView_cooking)).perform(scrollTo())
-            .check(matches(withText(recipe.ingredientsDescription)))
-        onView(withId(R.id.preparingTitle_textView_cooking)).perform(scrollTo())
-            .check(matches(withText(app.getString(R.string.preparing))))
-        onView(withId(R.id.preparingSteps_textView_cooking)).perform(scrollTo())
-            .check(matches(withText(recipe.preparingDescription)))
-        onView(withId(R.id.imagesTitle_textView_cooking)).perform(scrollTo())
-            .check(matches(withText(app.getString(R.string.images))))
+        toolbar.check(matches(hasDescendant(withText(toolbarTitle))))
+        foodName.check(matches(withText("${recipe.title}:")))
+        foodDescription.check(matches(withText(recipe.foodDescription)))
+        ingredientsTitle.check(matches(withText(app.getString(R.string.ingredients))))
+        ingredientsList.perform(scrollTo()).check(matches(withText(recipe.ingredientsDescription)))
+        preparingTitle.perform(scrollTo()).check(matches(withText(app.getString(R.string.preparing))))
+        preparingSteps.perform(scrollTo()).check(matches(withText(recipe.preparingDescription)))
+        imagesTitle.perform(scrollTo()).check(matches(withText(app.getString(R.string.images))))
     }
 
     @Test
@@ -143,6 +144,35 @@ class CookingFragmentTest {
         val snackbarText = "${app.getString(R.string.logged_as)} $userName"
         val recipe = TestUtil.recipe1
         val toolbarTitle = "${recipe.title} ${app.getString(R.string.recipe)}"
+
+        val scenario = launchFragmentInContainer(
+            fragmentArgs = bundle,
+            themeResId = R.style.AppTheme
+        ) {
+            CookingFragment(viewModelFactory, glide).also { fragment ->
+                fragment.viewLifecycleOwnerLiveData.observeForever { viewLifeCycleOwner ->
+                    if (viewLifeCycleOwner != null) {
+                        Navigation.setViewNavController(fragment.requireView(), navController)
+                    }
+                }
+            }
+        }
+        scenario.recreate()
+
+        toolbar.check(matches(hasDescendant(withText(toolbarTitle))))
+        foodName.check(matches(withText("${recipe.title}:")))
+        foodDescription.check(matches(withText(recipe.foodDescription)))
+        ingredientsList.perform(scrollTo()).check(matches(withText(recipe.ingredientsDescription)))
+        preparingSteps.perform(scrollTo()).check(matches(withText(recipe.preparingDescription)))
+        onView(withText(snackbarText)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun getError_observeMessage(){
+        val message = R.string.general_restapi_error
+        val expectedMessage = app.getString(R.string.general_restapi_error)
+        val returnedError : Flowable<Resource<Recipe>> = Flowable.just(Resource.error(message, null))
+        every { repo.getRecipeFromApi() } returns returnedError
 
         @Suppress("UNUSED_VARIABLE")
         val scenario = launchFragmentInContainer(
@@ -158,20 +188,12 @@ class CookingFragmentTest {
             }
         }
 
-        onView(withId(R.id.toolbar_cooking)).check(matches(hasDescendant(withText(toolbarTitle))))
-        onView(withId(R.id.foodName_textView_cooking)).check(matches(withText("${recipe.title}:")))
-        onView(withId(R.id.foodDescription_textView_cooking))
-            .check(matches(withText(recipe.foodDescription)))
-        onView(withId(R.id.ingredientsList_textView_cooking)).perform(scrollTo())
-            .check(matches(withText(recipe.ingredientsDescription)))
-        onView(withId(R.id.preparingSteps_textView_cooking)).perform(scrollTo())
-            .check(matches(withText(recipe.preparingDescription)))
-        onView(withText(snackbarText)).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun getError_observeMessage(){
-
+        toolbar.check(matches(not(hasDescendant(withText(containsString(""))))))
+        foodName.check(matches(withText("")))
+        foodDescription.check(matches(withText("")))
+        ingredientsList.check(matches(withText("")))
+        preparingSteps.check(matches(withText("")))
+        onView(withText(expectedMessage)).check(matches(isDisplayed()))
     }
 
 
