@@ -14,7 +14,7 @@
         android:background="@color/red3"
         android:theme="@style/ToolbarTheme" />
 
-        <ScrollView
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

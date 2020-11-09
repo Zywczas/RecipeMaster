@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/red3"
         android:theme="@style/ToolbarTheme"
-        app:titleTextAppearance="@style/Toolbar.TitleText" />
+        app:titleTextAppearance="@style/Toolbar.Title"/>
 
     <ScrollView
         android:layout_width="match_parent"
