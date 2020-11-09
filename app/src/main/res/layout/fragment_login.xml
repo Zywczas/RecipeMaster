@@ -60,7 +60,7 @@
         android:scaleType="center"
         app:fabSize="normal"
         app:sdMainFabAnimationRotateAngle="360"
-        app:sdMainFabOpenedSrc="@drawable/ic_add_35_white"
+        app:sdMainFabOpenedSrc="@drawable/ic_x_35_white"
         app:sdMainFabClosedSrc="@drawable/ic_add_35_white"
         app:sdUseReverseAnimationOnClose="true"
         />

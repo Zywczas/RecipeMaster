@@ -144,19 +144,33 @@ class CookingFragment @Inject constructor(
     }
 
     private fun setupOnClickListeners() {
+        //todo
+//        imagesTitle_textView_cooking.setOnClickListener {
+//            imagesTitle_textView_cooking.text = "dziala"
+//        showToast("dziala")}
+
+//        foodName_textView_cooking.setOnClickListener {
+//            foodName_textView_cooking.text = "dziala"
+//            showToast("dziala")}
+
         food0_imageView_cooking.setOnClickListener(imageClickListener)
         food1_imageView_cooking.setOnClickListener(imageClickListener)
         food2_imageView_cooking.setOnClickListener(imageClickListener)
     }
+//todo
+//    private val imageClickListener = View.OnClickListener {
+//        val index = getIndex(it)
+//        if (recipe?.images?.get(index) == null) {
+//            showSnackbar(getString(R.string.no_image_to_save))
+//        } else {
+//            requestedImageUrl = recipe!!.images!![index]
+//            showSaveConfirmationDialog()
+//        }
+//    }
 
     private val imageClickListener = View.OnClickListener {
-        val index = getIndex(it)
-        if (recipe?.images?.get(index) == null) {
-            showSnackbar(getString(R.string.no_image_to_save))
-        } else {
-            requestedImageUrl = recipe!!.images!![index]
-            showSaveConfirmationDialog()
-        }
+        imagesTitle_textView_cooking.text = "dziala"
+        showToast("dziala")
     }
 
     private fun getIndex(view: View): Int =
