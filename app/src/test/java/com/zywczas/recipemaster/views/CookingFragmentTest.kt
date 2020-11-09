@@ -28,8 +28,11 @@ import io.mockk.unmockkAll
 import io.reactivex.rxjava3.core.Flowable
 import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.CoreMatchers.not
-import org.junit.*
-import org.junit.Assert.*
+import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowAlertDialog

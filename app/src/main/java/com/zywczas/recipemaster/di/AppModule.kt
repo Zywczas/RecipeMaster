@@ -4,9 +4,7 @@ import android.app.Application
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
-import com.facebook.AccessToken
 import com.facebook.CallbackManager
-import com.facebook.login.LoginFragment
 import com.facebook.login.LoginManager
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.model.webservice.RecipeRestApiService

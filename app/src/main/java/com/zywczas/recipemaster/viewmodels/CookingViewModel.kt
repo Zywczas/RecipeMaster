@@ -1,12 +1,9 @@
 package com.zywczas.recipemaster.viewmodels
 
-import android.app.Application
-import android.provider.MediaStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
-import com.bumptech.glide.RequestManager
 import com.zywczas.recipemaster.model.Recipe
 import com.zywczas.recipemaster.model.repositories.CookingRepository
 import com.zywczas.recipemaster.utilities.Resource

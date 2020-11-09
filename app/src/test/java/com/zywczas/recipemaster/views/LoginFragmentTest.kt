@@ -1,5 +1,6 @@
 package com.zywczas.recipemaster.views
 
+import android.view.Window
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.Navigation
@@ -19,7 +20,7 @@ import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
 import org.hamcrest.Matchers.not
 import org.junit.After
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -97,21 +98,24 @@ class LoginFragmentTest {
         onView(withText(getRecipe)).check(matches(isDisplayed()))
         onView(withText(faceLogin)).check(matches(isDisplayed()))
     }
-//todo
-//    @Test
-//    fun isBackgroundDimmedOnSpeedDialClick(){
-//        @Suppress("UNUSED_VARIABLE")
-//        val scenario = launchFragmentInContainer<LoginFragment>(
-//            factory = fragmentFactory,
-//            themeResId = R.style.AppTheme
-//        )
-//        onView(withId(R.id.speedDial_login)).perform(click())
-//
-//        onView(withId(R.id.get_recipe_menuItem)).check(matches(isDisplayed()))
-//        onView(withId(R.id.facebook_menuItem)).check(matches(isDisplayed()))
-//        onView(withText(getRecipe)).check(matches(isDisplayed()))
-//        onView(withText(faceLogin)).check(matches(isDisplayed()))
-//    }
+
+    @Test
+    fun isBackgroundDimmedOnSpeedDialClick(){
+        lateinit var window : Window
+        @Suppress("UNUSED_VARIABLE")
+        val scenario = launchFragmentInContainer<LoginFragment>(
+            factory = fragmentFactory,
+            themeResId = R.style.AppTheme
+        ).onFragment {
+            window = it.requireActivity().window
+        }
+
+        onView(withId(R.id.speedDial_login)).perform(click())
+        onView(withId(R.id.constraintLayout_login)).check(matches(withAlpha(0.3F)))
+
+        onView(withId(R.id.speedDial_login)).perform(click())
+        onView(withId(R.id.constraintLayout_login)).check(matches(withAlpha(1F)))
+    }
 
     @Test
     fun fragmentDestroyed_isInstanceStateSavedAndRestored(){

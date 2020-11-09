@@ -10,11 +10,11 @@ import com.zywczas.recipemaster.utilities.Resource
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.rxjava3.core.Flowable
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.junit.jupiter.api.Assertions.assertEquals
 
 @ExtendWith(InstantExecutorExtension::class)
 class CookingViewModelTest {

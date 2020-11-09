@@ -3,7 +3,6 @@ package com.zywczas.recipemaster.model.repositories
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.model.Recipe
 import com.zywczas.recipemaster.model.toRecipe
-import com.zywczas.recipemaster.model.webservice.RecipeFromApi
 import com.zywczas.recipemaster.model.webservice.RecipeRestApiService
 import com.zywczas.recipemaster.utilities.Resource
 import com.zywczas.recipemaster.utilities.logD
