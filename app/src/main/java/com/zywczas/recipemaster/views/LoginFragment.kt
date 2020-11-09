@@ -1,6 +1,7 @@
 package com.zywczas.recipemaster.views
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -12,6 +13,7 @@ import com.facebook.FacebookException
 import com.facebook.Profile
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.zywczas.recipemaster.R
 import com.zywczas.recipemaster.SessionManager
@@ -32,7 +34,7 @@ class LoginFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
         checkIfLoggedInAndGetProfile()
         setupLoginManagerCallback()
-        displayUI()
+        setupSpeedDialMenu()
         setupOnClickListeners()
     }
 
@@ -73,8 +75,23 @@ class LoginFragment @Inject constructor(
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun displayUI(){
-        speedDial_login.inflate(R.menu.menu_speed_dial)
+    private fun setupSpeedDialMenu(){
+        speedDial_login.addActionItem(
+            SpeedDialActionItem.Builder(R.id.facebook_menuItem, R.drawable.ic_f_108)
+                .setFabBackgroundColor(ContextCompat.getColor(requireContext(), R.color.facebook_color))
+                .setLabel(getString(R.string.login_with_facebook))
+                .setLabelBackgroundColor(Color.WHITE)
+                .setLabelClickable(false)
+                .create()
+        )
+        speedDial_login.addActionItem(
+            SpeedDialActionItem.Builder(R.id.get_recipe_menuItem, R.drawable.ic_heart_45)
+                .setFabBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red3))
+                .setLabel(getString(R.string.get_recipe))
+                .setLabelBackgroundColor(Color.WHITE)
+                .setLabelClickable(false)
+                .create()
+        )
     }
 
     private fun setupOnClickListeners(){

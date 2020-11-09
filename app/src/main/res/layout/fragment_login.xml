@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:theme="@style/AppTheme"
-        android:scaleType="center"
+        android:scaleType="centerCrop"
         app:fabSize="normal"
         app:sdMainFabAnimationRotateAngle="360"
         app:sdMainFabOpenedSrc="@drawable/ic_x_35_white"

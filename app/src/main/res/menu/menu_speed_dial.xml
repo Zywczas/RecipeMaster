@@ -3,12 +3,10 @@
 
     <item
         android:id="@+id/facebook_menuItem"
-        android:title="@string/login_with_facebook"
-        android:icon="@drawable/ic_facebook_45"/>
+        android:title="@string/login_with_facebook" />
 
     <item
         android:id="@+id/get_recipe_menuItem"
-        android:icon="@drawable/ic_get_recipe"
         android:title="@string/get_recipe" />
 
 </menu>
