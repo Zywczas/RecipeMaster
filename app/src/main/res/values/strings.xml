@@ -3,7 +3,7 @@
     <string name="facebook_app_id">666053657437502</string>
 
     <!--    general-->
-    <string name="app_name">RecipeMaster</string>
+    <string name="app_name">Recipe Master</string>
     <string name="recipe">Recipe!</string>
     <string name="yes">OK</string>
     <string name="no">Cancel</string>
